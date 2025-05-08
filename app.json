@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "TeamTick",
+    "slug": "TeamTick",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "允许 TeamTick 访问你的相机",
+          "microphonePermission": "允许 TeamTick 访问你的麦克风",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiUrl": "http://110.64.86.130:8080",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8601831c-ec94-4208-9ff9-9a6440c7ae5c"
+      }
+    },
+    "android": {
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.TeamTick"
+    },
+    "owner": "c_w_xiaohei"
+  }
+}
