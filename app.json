@@ -23,7 +23,8 @@
           "microphonePermission": "允许 TeamTick 访问你的麦克风",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true
