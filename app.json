@@ -4,11 +4,19 @@
     "slug": "TeamTick",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "myapp",
+    "icon": "./assets/images/app.png",
+    "scheme": "teamtick",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/images/app.png",
+      "infoPlist": {
+        "NSCameraUsageDescription": "允许 TeamTick 访问你的相机进行人脸识别",
+        "NSMicrophoneUsageDescription": "允许 TeamTick 访问你的麦克风",
+        "NSLocationWhenInUseUsageDescription": "需要获取位置信息以进行位置签到",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "需要获取位置信息以进行位置签到"
+      }
     },
     "web": {
       "bundler": "metro",
@@ -24,27 +32,74 @@
           "recordAudioAndroid": true
         }
       ],
-      "expo-asset"
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "允许 TeamTick 获取您的位置进行签到验证"
+        }
+      ],
+      "expo-asset",
+      "expo-font",
+      [
+        "./withAmapGeolocation.js",
+        {
+          "apiKey": ""
+        }
+      ],
+      [
+        "./withAmap3d.js",
+        {
+          "apiKey": ""
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/app.png",
+          "color": "#3B82F6"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
-      "apiUrl": "http://110.64.86.130:8080",
+      "apiUrl": "",
       "router": {
         "origin": false
       },
       "eas": {
         "projectId": "8601831c-ec94-4208-9ff9-9a6440c7ae5c"
+      },
+      "amap": {
+        "android": "",
+        "ios": ""
       }
     },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/app.png",
+        "backgroundColor": "#ffffff"
+      },
       "permissions": [
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.NFC",
+        "android.permission.VIBRATE",
+        "android.permission.POST_NOTIFICATIONS"
       ],
       "package": "com.anonymous.TeamTick"
     },
-    "owner": "c_w_xiaohei"
+    "owner": "c_w_xiaohei",
+    "notification": {
+      "icon": "./assets/images/app.png",
+      "color": "#3B82F6",
+      "androidMode": "default",
+      "androidCollapsedTitle": "TeamTick通知",
+      "iosDisplayInForeground": true
+    }
   }
 }

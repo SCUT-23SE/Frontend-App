@@ -12,6 +12,7 @@
  */
 
 
+import { TaskVerificationConfig } from './task-verification-config';
 
 /**
  * 
@@ -20,17 +21,35 @@
  */
 export interface InlineObject10 {
     /**
-     * 异常原因说明
+     * 任务名称
      * @type {string}
      * @memberof InlineObject10
      */
-    reason: string;
+    taskName: string;
     /**
-     * 证明图片 URL (可选)
+     * 任务描述
      * @type {string}
      * @memberof InlineObject10
      */
-    proofImageUrls?: string;
+    description: string;
+    /**
+     * 签到开始时间（Unix时间戳，单位：秒）
+     * @type {number}
+     * @memberof InlineObject10
+     */
+    startTime: number;
+    /**
+     * 签到结束时间（Unix时间戳，单位：秒）
+     * @type {number}
+     * @memberof InlineObject10
+     */
+    endTime: number;
+    /**
+     * 
+     * @type {TaskVerificationConfig}
+     * @memberof InlineObject10
+     */
+    verificationConfig: TaskVerificationConfig;
 }
 
 

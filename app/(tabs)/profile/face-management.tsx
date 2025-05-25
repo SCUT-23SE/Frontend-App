@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Camera as CameraIcon, RefreshCw } from 'lucide-react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { faceApi } from '@/request';
 import { useAuth } from '@/stores/auth';
@@ -27,11 +27,7 @@ export default function FaceManagementScreen() {
   const [hasFaceData, setHasFaceData] = useState(false);
   const [faceImage, setFaceImage] = useState('');
   const [lastUpdateTime, setLastUpdateTime] = useState('');
-  const [isCameraVisible, setIsCameraVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [permission, requestPermission] = useCameraPermissions();
-  const cameraRef = useRef<CameraView>(null);
-  const [isCameraReady, setIsCameraReady] = useState(false);
 
   // 从auth store获取用户信息
   const { user, isAuthenticated } = useAuth();
@@ -42,13 +38,6 @@ export default function FaceManagementScreen() {
       fetchUserFace();
     }
   }, [isAuthenticated, user]);
-
-  // 相机组件隐藏时重置相机就绪状态
-  useEffect(() => {
-    if (!isCameraVisible) {
-      setIsCameraReady(false);
-    }
-  }, [isCameraVisible]);
 
   const fetchUserFace = async () => {
     if (!user) {
@@ -100,41 +89,40 @@ export default function FaceManagementScreen() {
     }
   };
 
-  const handleCaptureFace = () => {
-    if (permission?.granted) {
-      setIsCameraVisible(true);
-    } else {
-      requestPermission();
-    }
-  };
+  const takePhoto = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
-  const handleUpdateFace = () => {
-    if (permission?.granted) {
-      setIsCameraVisible(true);
-    } else {
-      requestPermission();
+    if (permissionResult.granted === false) {
+      Alert.alert('需要权限', '需要访问您的相机来采集人脸信息');
+      return;
     }
-  };
 
-  // 处理拍照结果
-  const handlePhotoTaken = async (photo: PhotoType) => {
     try {
-      // 处理图片，调整大小以减少文件大小
-      const manipResult = await ImageManipulator.manipulateAsync(
-        photo.uri,
-        [{ resize: { width: 300 } }],
-        {
-          format: ImageManipulator.SaveFormat.JPEG,
-          compress: 0.5,
-          base64: true,
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.8,
+        base64: false,
+        cameraType: ImagePicker.CameraType.front,
+      });
+
+      if (!result.canceled && result.assets && result.assets.length > 0) {
+        const photo = result.assets[0];
+
+        // 处理图片，调整大小以减少文件大小
+        const manipResult = await ImageManipulator.manipulateAsync(
+          photo.uri,
+          [{ resize: { width: 300 } }],
+          {
+            format: ImageManipulator.SaveFormat.JPEG,
+            compress: 0.5,
+            base64: true,
+          }
+        );
+
+        if (manipResult.base64) {
+          await uploadFaceImage(manipResult.base64);
         }
-      );
-
-      // 关闭摄像头预览
-      setIsCameraVisible(false);
-
-      if (manipResult.base64) {
-        await uploadFaceImage(manipResult.base64);
       }
     } catch (error) {
       Alert.alert('错误', '处理照片失败，请重试');
@@ -164,8 +152,33 @@ export default function FaceManagementScreen() {
       setLastUpdateTime(new Date().toLocaleDateString());
 
       Alert.alert('成功', '人脸信息已更新');
-    } catch (error) {
-      Alert.alert('错误', '上传人脸数据失败，请重试');
+    } catch (error: any) {
+      // 处理特定的错误类型
+      if (
+        error.isAxiosError &&
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data
+      ) {
+        // 检查是否是"图片中未检测到人脸"的错误
+        const responseData = error.response.data;
+        if (
+          responseData.message &&
+          responseData.message.includes('图片中未检测到人脸')
+        ) {
+          Alert.alert(
+            '人脸识别失败',
+            '上传的图片中未检测到人脸，请确保：\n\n1. 面部清晰可见\n2. 光线充足\n3. 正面面对镜头\n\n请重新拍摄照片。'
+          );
+        } else {
+          Alert.alert(
+            '错误',
+            responseData.message || '上传人脸数据失败，请重试'
+          );
+        }
+      } else {
+        Alert.alert('错误', '上传人脸数据失败，请重试');
+      }
       console.error('上传人脸数据失败:', error);
     } finally {
       setIsLoading(false);
@@ -181,118 +194,11 @@ export default function FaceManagementScreen() {
     );
   }
 
-  if (!permission) {
-    // 摄像头权限加载中
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#4A90E2" />
-        <Text style={styles.loadingText}>正在获取摄像头权限...</Text>
-      </View>
-    );
-  }
-
-  if (!permission.granted) {
-    // 摄像头权限未授予
-    return (
-      <View style={styles.container}>
-        <Text style={styles.placeholderText}>
-          需要摄像头权限才能进行人脸采集
-        </Text>
-        <TouchableOpacity
-          style={styles.captureButton}
-          onPress={requestPermission}
-        >
-          <Text style={styles.buttonText}>授予摄像头权限</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   if (isLoading) {
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" color="#4A90E2" />
         <Text style={styles.loadingText}>正在处理...</Text>
-      </View>
-    );
-  }
-
-  if (isCameraVisible) {
-    return (
-      <View style={styles.cameraContainer}>
-        {/* 相机视图 - 不再包含子组件 */}
-        <CameraView
-          ref={cameraRef}
-          style={styles.camera}
-          facing="front"
-          mode="picture"
-          responsiveOrientationWhenOrientationLocked={true}
-          onCameraReady={() => {
-            console.log('相机准备就绪');
-            setIsCameraReady(true);
-          }}
-          onMountError={(error) => {
-            console.error('相机挂载错误:', error);
-            Alert.alert('错误', '相机初始化失败，请重试');
-            setIsCameraVisible(false);
-          }}
-        />
-
-        {/* 相机覆盖层放在外面 */}
-        <View style={styles.cameraOverlay}>
-          <View style={styles.faceFrame} />
-          <Text style={styles.cameraInstructions}>
-            {isCameraReady ? '请将脸部置于框内' : '相机正在初始化...'}
-          </Text>
-        </View>
-
-        {/* 相机控制按钮放在外面 */}
-        <View style={styles.cameraControls}>
-          <TouchableOpacity
-            style={styles.cancelButton}
-            onPress={() => setIsCameraVisible(false)}
-          >
-            <Text style={styles.cancelButtonText}>取消</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.captureButton,
-              !isCameraReady && styles.disabledButton,
-            ]}
-            disabled={!isCameraReady}
-            onPress={async () => {
-              try {
-                if (!isCameraReady) {
-                  Alert.alert('提示', '相机正在初始化，请稍等');
-                  return;
-                }
-
-                if (cameraRef.current) {
-                  setIsLoading(true);
-
-                  // 优化相机拍照配置
-                  const photo = await cameraRef.current.takePictureAsync({
-                    quality: 0.8,
-                    base64: false, // 改为false，让ImageManipulator生成Base64
-                    exif: false,
-                  });
-
-                  // 处理拍摄的照片
-                  await handlePhotoTaken(photo);
-                } else {
-                  Alert.alert('错误', '相机未初始化，请重试');
-                }
-              } catch (error) {
-                console.error('拍照失败:', error);
-                Alert.alert('错误', '拍照失败，请重试');
-                setIsLoading(false);
-              }
-            }}
-          >
-            <View style={styles.captureCircle} />
-          </TouchableOpacity>
-          <View style={styles.spacer} />
-        </View>
       </View>
     );
   }
@@ -316,10 +222,7 @@ export default function FaceManagementScreen() {
             <Text style={styles.userText}>用户ID: {user.id}</Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.updateButton}
-            onPress={handleUpdateFace}
-          >
+          <TouchableOpacity style={styles.updateButton} onPress={takePhoto}>
             <RefreshCw size={20} color="#fff" />
             <Text style={styles.buttonText}>更新人脸信息</Text>
           </TouchableOpacity>
@@ -335,10 +238,7 @@ export default function FaceManagementScreen() {
             <Text style={styles.userText}>用户ID: {user.id}</Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.captureButton}
-            onPress={handleCaptureFace}
-          >
+          <TouchableOpacity style={styles.captureButton} onPress={takePhoto}>
             <CameraIcon size={20} color="#fff" />
             <Text style={styles.buttonText}>采集人脸信息</Text>
           </TouchableOpacity>
@@ -408,10 +308,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  disabledButton: {
-    backgroundColor: '#A9C7ED',
-    shadowColor: '#A9C7ED',
-  },
   updateButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -433,69 +329,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 8,
-  },
-  // 相机相关样式
-  cameraContainer: {
-    flex: 1,
-    position: 'relative',
-  },
-  camera: {
-    flex: 1,
-  },
-  cameraOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  faceFrame: {
-    width: 250,
-    height: 250,
-    borderRadius: 125,
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.8)',
-    backgroundColor: 'transparent',
-  },
-  cameraInstructions: {
-    color: 'white',
-    fontSize: 16,
-    marginTop: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: 8,
-    borderRadius: 4,
-  },
-  cameraControls: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-  },
-  captureCircle: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    backgroundColor: 'white',
-    borderWidth: 5,
-    borderColor: 'rgba(255, 255, 255, 0.5)',
-  },
-  cancelButton: {
-    padding: 15,
-  },
-  cancelButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  spacer: {
-    width: 60,
   },
   loadingText: {
     marginTop: 16,

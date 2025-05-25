@@ -12,44 +12,25 @@
  */
 
 
-import { TaskVerificationConfig } from './task-verification-config';
 
 /**
- * 创建签到任务时，根据verificationConfig.checkinMethods的设置决定是否需要提供额外参数： - 若checkinMethods.wifi为true，则必须提供wifiInfo - 若checkinMethods.nfc为true，则必须提供nfcInfo
+ * 
  * @export
  * @interface InlineObject6
  */
 export interface InlineObject6 {
     /**
-     * 任务名称
+     * 新的用户组名称
      * @type {string}
      * @memberof InlineObject6
      */
-    taskName: string;
+    groupName: string;
     /**
-     * 任务描述
+     * 新的用户组描述
      * @type {string}
      * @memberof InlineObject6
      */
-    description?: string;
-    /**
-     * 签到开始时间（Unix时间戳，单位：秒）
-     * @type {number}
-     * @memberof InlineObject6
-     */
-    startTime: number;
-    /**
-     * 签到结束时间（Unix时间戳，单位：秒）
-     * @type {number}
-     * @memberof InlineObject6
-     */
-    endTime: number;
-    /**
-     * 
-     * @type {TaskVerificationConfig}
-     * @memberof InlineObject6
-     */
-    verificationConfig: TaskVerificationConfig;
+    description: string;
 }
 
 

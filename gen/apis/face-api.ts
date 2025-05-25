@@ -26,9 +26,9 @@ import {
 // @ts-ignore
 import { BadRequest } from '../models';
 // @ts-ignore
-import { InlineObject13 } from '../models';
+import { InlineObject15 } from '../models';
 // @ts-ignore
-import { InlineObject14 } from '../models';
+import { InlineObject16 } from '../models';
 // @ts-ignore
 import { InternalServerError } from '../models';
 // @ts-ignore
@@ -160,12 +160,12 @@ export const FaceApiAxiosParamCreator = function (
     /**
      * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
      * @summary 创建或更新当前用户的人脸数据
-     * @param {InlineObject13} [inlineObject13]
+     * @param {InlineObject15} [inlineObject15]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFacePut: async (
-      inlineObject13?: InlineObject13,
+      inlineObject15?: InlineObject15,
       options: any = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/users/me/face`;
@@ -199,11 +199,11 @@ export const FaceApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject13 !== 'string' ||
+        typeof inlineObject15 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject13 !== undefined ? inlineObject13 : {})
-        : inlineObject13 || '';
+        ? JSON.stringify(inlineObject15 !== undefined ? inlineObject15 : {})
+        : inlineObject15 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -213,12 +213,12 @@ export const FaceApiAxiosParamCreator = function (
     /**
      * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
      * @summary 创建或更新当前用户的人脸数据
-     * @param {InlineObject13} [inlineObject13]
+     * @param {InlineObject15} [inlineObject15]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFacePut_2: async (
-      inlineObject13?: InlineObject13,
+      inlineObject15?: InlineObject15,
       options: any = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/users/me/face`;
@@ -252,11 +252,11 @@ export const FaceApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject13 !== 'string' ||
+        typeof inlineObject15 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject13 !== undefined ? inlineObject13 : {})
-        : inlineObject13 || '';
+        ? JSON.stringify(inlineObject15 !== undefined ? inlineObject15 : {})
+        : inlineObject15 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -266,12 +266,12 @@ export const FaceApiAxiosParamCreator = function (
     /**
      * 验证提供的人脸数据是否与当前用户的人脸数据匹配
      * @summary 验证人脸数据
-     * @param {InlineObject14} [inlineObject14]
+     * @param {InlineObject16} [inlineObject16]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFaceVerifyPost: async (
-      inlineObject14?: InlineObject14,
+      inlineObject16?: InlineObject16,
       options: any = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/users/me/face/verify`;
@@ -305,11 +305,11 @@ export const FaceApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject14 !== 'string' ||
+        typeof inlineObject16 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject14 !== undefined ? inlineObject14 : {})
-        : inlineObject14 || '';
+        ? JSON.stringify(inlineObject16 !== undefined ? inlineObject16 : {})
+        : inlineObject16 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -319,12 +319,12 @@ export const FaceApiAxiosParamCreator = function (
     /**
      * 验证提供的人脸数据是否与当前用户的人脸数据匹配
      * @summary 验证人脸数据
-     * @param {InlineObject14} [inlineObject14]
+     * @param {InlineObject16} [inlineObject16]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFaceVerifyPost_3: async (
-      inlineObject14?: InlineObject14,
+      inlineObject16?: InlineObject16,
       options: any = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/users/me/face/verify`;
@@ -358,11 +358,11 @@ export const FaceApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject14 !== 'string' ||
+        typeof inlineObject16 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject14 !== undefined ? inlineObject14 : {})
-        : inlineObject14 || '';
+        ? JSON.stringify(inlineObject16 !== undefined ? inlineObject16 : {})
+        : inlineObject16 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -441,12 +441,12 @@ export const FaceApiFp = function (configuration?: Configuration) {
     /**
      * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
      * @summary 创建或更新当前用户的人脸数据
-     * @param {InlineObject13} [inlineObject13]
+     * @param {InlineObject15} [inlineObject15]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async usersMeFacePut(
-      inlineObject13?: InlineObject13,
+      inlineObject15?: InlineObject15,
       options?: any
     ): Promise<
       (
@@ -456,7 +456,7 @@ export const FaceApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await FaceApiAxiosParamCreator(
         configuration
-      ).usersMeFacePut(inlineObject13, options);
+      ).usersMeFacePut(inlineObject15, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -471,12 +471,12 @@ export const FaceApiFp = function (configuration?: Configuration) {
     /**
      * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
      * @summary 创建或更新当前用户的人脸数据
-     * @param {InlineObject13} [inlineObject13]
+     * @param {InlineObject15} [inlineObject15]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async usersMeFacePut_2(
-      inlineObject13?: InlineObject13,
+      inlineObject15?: InlineObject15,
       options?: any
     ): Promise<
       (
@@ -486,7 +486,7 @@ export const FaceApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await FaceApiAxiosParamCreator(
         configuration
-      ).usersMeFacePut_2(inlineObject13, options);
+      ).usersMeFacePut_2(inlineObject15, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -501,12 +501,12 @@ export const FaceApiFp = function (configuration?: Configuration) {
     /**
      * 验证提供的人脸数据是否与当前用户的人脸数据匹配
      * @summary 验证人脸数据
-     * @param {InlineObject14} [inlineObject14]
+     * @param {InlineObject16} [inlineObject16]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async usersMeFaceVerifyPost(
-      inlineObject14?: InlineObject14,
+      inlineObject16?: InlineObject16,
       options?: any
     ): Promise<
       (
@@ -516,7 +516,7 @@ export const FaceApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await FaceApiAxiosParamCreator(
         configuration
-      ).usersMeFaceVerifyPost(inlineObject14, options);
+      ).usersMeFaceVerifyPost(inlineObject16, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -531,12 +531,12 @@ export const FaceApiFp = function (configuration?: Configuration) {
     /**
      * 验证提供的人脸数据是否与当前用户的人脸数据匹配
      * @summary 验证人脸数据
-     * @param {InlineObject14} [inlineObject14]
+     * @param {InlineObject16} [inlineObject16]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async usersMeFaceVerifyPost_3(
-      inlineObject14?: InlineObject14,
+      inlineObject16?: InlineObject16,
       options?: any
     ): Promise<
       (
@@ -546,7 +546,7 @@ export const FaceApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await FaceApiAxiosParamCreator(
         configuration
-      ).usersMeFaceVerifyPost_3(inlineObject14, options);
+      ).usersMeFaceVerifyPost_3(inlineObject16, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -604,61 +604,61 @@ export const FaceApiFactory = function (
     /**
      * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
      * @summary 创建或更新当前用户的人脸数据
-     * @param {InlineObject13} [inlineObject13]
+     * @param {InlineObject15} [inlineObject15]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFacePut(
-      inlineObject13?: InlineObject13,
+      inlineObject15?: InlineObject15,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return FaceApiFp(configuration)
-        .usersMeFacePut(inlineObject13, options)
+        .usersMeFacePut(inlineObject15, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
      * @summary 创建或更新当前用户的人脸数据
-     * @param {InlineObject13} [inlineObject13]
+     * @param {InlineObject15} [inlineObject15]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFacePut_2(
-      inlineObject13?: InlineObject13,
+      inlineObject15?: InlineObject15,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return FaceApiFp(configuration)
-        .usersMeFacePut_2(inlineObject13, options)
+        .usersMeFacePut_2(inlineObject15, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 验证提供的人脸数据是否与当前用户的人脸数据匹配
      * @summary 验证人脸数据
-     * @param {InlineObject14} [inlineObject14]
+     * @param {InlineObject16} [inlineObject16]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFaceVerifyPost(
-      inlineObject14?: InlineObject14,
+      inlineObject16?: InlineObject16,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return FaceApiFp(configuration)
-        .usersMeFaceVerifyPost(inlineObject14, options)
+        .usersMeFaceVerifyPost(inlineObject16, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 验证提供的人脸数据是否与当前用户的人脸数据匹配
      * @summary 验证人脸数据
-     * @param {InlineObject14} [inlineObject14]
+     * @param {InlineObject16} [inlineObject16]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     usersMeFaceVerifyPost_3(
-      inlineObject14?: InlineObject14,
+      inlineObject16?: InlineObject16,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return FaceApiFp(configuration)
-        .usersMeFaceVerifyPost_3(inlineObject14, options)
+        .usersMeFaceVerifyPost_3(inlineObject16, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -702,59 +702,59 @@ export class FaceApi extends BaseAPI {
   /**
    * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
    * @summary 创建或更新当前用户的人脸数据
-   * @param {InlineObject13} [inlineObject13]
+   * @param {InlineObject15} [inlineObject15]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof FaceApi
    */
-  public usersMeFacePut(inlineObject13?: InlineObject13, options?: any) {
+  public usersMeFacePut(inlineObject15?: InlineObject15, options?: any) {
     return FaceApiFp(this.configuration)
-      .usersMeFacePut(inlineObject13, options)
+      .usersMeFacePut(inlineObject15, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
    * 创建或更新已登录用户的人脸数据信息，如果存在则更新，不存在则创建
    * @summary 创建或更新当前用户的人脸数据
-   * @param {InlineObject13} [inlineObject13]
+   * @param {InlineObject15} [inlineObject15]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof FaceApi
    */
-  public usersMeFacePut_2(inlineObject13?: InlineObject13, options?: any) {
+  public usersMeFacePut_2(inlineObject15?: InlineObject15, options?: any) {
     return FaceApiFp(this.configuration)
-      .usersMeFacePut_2(inlineObject13, options)
+      .usersMeFacePut_2(inlineObject15, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
    * 验证提供的人脸数据是否与当前用户的人脸数据匹配
    * @summary 验证人脸数据
-   * @param {InlineObject14} [inlineObject14]
+   * @param {InlineObject16} [inlineObject16]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof FaceApi
    */
-  public usersMeFaceVerifyPost(inlineObject14?: InlineObject14, options?: any) {
+  public usersMeFaceVerifyPost(inlineObject16?: InlineObject16, options?: any) {
     return FaceApiFp(this.configuration)
-      .usersMeFaceVerifyPost(inlineObject14, options)
+      .usersMeFaceVerifyPost(inlineObject16, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
    * 验证提供的人脸数据是否与当前用户的人脸数据匹配
    * @summary 验证人脸数据
-   * @param {InlineObject14} [inlineObject14]
+   * @param {InlineObject16} [inlineObject16]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof FaceApi
    */
   public usersMeFaceVerifyPost_3(
-    inlineObject14?: InlineObject14,
+    inlineObject16?: InlineObject16,
     options?: any
   ) {
     return FaceApiFp(this.configuration)
-      .usersMeFaceVerifyPost_3(inlineObject14, options)
+      .usersMeFaceVerifyPost_3(inlineObject16, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

@@ -1,12 +1,14 @@
 **1.用户申请入组**
 用户流程：用户搜索用户组并申请加入
-后端响应：join-req出现一个pending记录
-问题1：重复入组申请没有拦截导致500
-问题2：在管理员的 /groups/1/join-requests?status=pending 接口中返回空列表。
+后端响应：join-req 出现一个 pending 记录
+问题 1：重复入组申请没有拦截导致 500
+问题 2：在管理员的 /groups/1/join-requests?status=pending 接口中返回空列表。
 
 **2.用户执行签到**
 用户流程：用户校验完毕后执行签到
-问题：/checkin-tasks/2/checkin 接口没有拦截重复请求导致500
+问题：/checkin-tasks/2/checkin 接口没有拦截重复请求导致 500
 
-3.
-user/me/checkin-record 的接口定义需要调整，实现也需要调整
+3.  user/me/checkin-record 的接口定义需要调整，实现也需要调整
+
+4. 用户被踢出后无法重复申请，因为数据表重复
+5. 在加入用户组的地方录入人脸后，返回按钮消失

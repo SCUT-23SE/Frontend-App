@@ -12,7 +12,6 @@
  */
 
 
-import { TaskVerificationConfig } from './task-verification-config';
 
 /**
  * 
@@ -21,35 +20,11 @@ import { TaskVerificationConfig } from './task-verification-config';
  */
 export interface InlineObject7 {
     /**
-     * 任务名称
+     * 申请理由 (可选)
      * @type {string}
      * @memberof InlineObject7
      */
-    taskName: string;
-    /**
-     * 任务描述
-     * @type {string}
-     * @memberof InlineObject7
-     */
-    description: string;
-    /**
-     * 签到开始时间（Unix时间戳，单位：秒）
-     * @type {number}
-     * @memberof InlineObject7
-     */
-    startTime: number;
-    /**
-     * 签到结束时间（Unix时间戳，单位：秒）
-     * @type {number}
-     * @memberof InlineObject7
-     */
-    endTime: number;
-    /**
-     * 
-     * @type {TaskVerificationConfig}
-     * @memberof InlineObject7
-     */
-    verificationConfig: TaskVerificationConfig;
+    reason?: string;
 }
 
 

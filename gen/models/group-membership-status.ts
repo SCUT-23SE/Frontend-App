@@ -14,7 +14,7 @@
 
 
 /**
- * 用户在组中的状态：none(未关联)、pending(申请中)、member(普通成员)、rejected(申请被拒绝)
+ * 用户在组中的状态：none(未关联)、pending(申请中)、member(普通成员)、admin(管理员)、rejected(申请被拒绝)
  * @export
  * @enum {string}
  */
@@ -22,6 +22,7 @@ export enum GroupMembershipStatus {
     None = 'none',
     Pending = 'pending',
     Member = 'member',
+    Admin = 'admin',
     Rejected = 'rejected'
 }
 

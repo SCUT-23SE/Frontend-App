@@ -9,7 +9,7 @@ import { getToken, clearToken } from './client';
 import { navigateToLogin } from './navigationService';
 
 // Face API 基础URL配置 - 硬编码为特定地址
-export const FACE_API_BASE_URL = 'http://110.64.86.97:3000';
+export const FACE_API_BASE_URL = 'http://face.code-harmony.top:3000';
 
 // 创建face API专用的axios实例
 export const faceAxiosInstance: AxiosInstance = axios.create({

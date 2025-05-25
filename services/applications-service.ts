@@ -3,8 +3,8 @@ import {
   JoinRequest,
   RequestQueryStatus,
   BaseResponseCodeEnum,
-  InlineObject5,
-  InlineObject5ActionEnum,
+  InlineObject8,
+  InlineObject8ActionEnum,
 } from '@/gen/models';
 import {
   Application,
@@ -18,7 +18,6 @@ const transformApplication = (joinRequest: JoinRequest): Application => {
     id: joinRequest.requestId!.toString(), // Ensure requestId is present and convert to string
     userId: joinRequest.userId!.toString(), // Ensure userId is present and convert to string
     userName: joinRequest.username || '未知用户', // Provide default if username is missing
-    reason: joinRequest.reason, // 获取用户提交的申请理由
     submitTime: joinRequest.requestedAt!, // Use requestedAt timestamp
     status: joinRequest.status!,
   };
@@ -85,11 +84,11 @@ export const applicationsService = {
     rejectReason?: string
   ): Promise<HandleApplicationResponse> => {
     try {
-      const requestBody: InlineObject5 = {
+      const requestBody: InlineObject8 = {
         action:
           action === 'approve'
-            ? InlineObject5ActionEnum.Approve
-            : InlineObject5ActionEnum.Reject,
+            ? InlineObject8ActionEnum.Approve
+            : InlineObject8ActionEnum.Reject,
         ...(action === 'reject' && rejectReason && { rejectReason }),
       };
 

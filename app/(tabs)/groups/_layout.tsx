@@ -18,6 +18,7 @@ export default function GroupsLayout() {
         options={{
           title: '用户组信息',
           presentation: 'card',
+          headerShadowVisible: false,
         }}
       />
       <Stack.Screen

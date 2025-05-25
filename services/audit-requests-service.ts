@@ -3,7 +3,7 @@ import {
   AuditRequestStatusEnum,
   BaseResponseCodeEnum,
   RequestQueryStatus,
-  InlineObject11ActionEnum,
+  InlineObject14ActionEnum,
 } from '@/gen/models';
 import { formatUnixTimestamp } from '@/utils/date';
 
@@ -109,8 +109,8 @@ export const auditRequestsService = {
       // 将字符串action映射为枚举值
       const actionEnum =
         action === 'approve'
-          ? InlineObject11ActionEnum.Approve
-          : InlineObject11ActionEnum.Reject;
+          ? InlineObject14ActionEnum.Approve
+          : InlineObject14ActionEnum.Reject;
 
       const response = await auditRequestsApi.auditRequestsAuditRequestIdPut(
         parseInt(auditRequestId),

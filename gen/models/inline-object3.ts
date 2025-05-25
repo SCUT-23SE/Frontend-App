@@ -20,17 +20,27 @@
  */
 export interface InlineObject3 {
     /**
-     * 新的用户组名称
+     * 用户邮箱地址
      * @type {string}
      * @memberof InlineObject3
      */
-    groupName: string;
+    email: string;
     /**
-     * 新的用户组描述
+     * 验证码使用场景
      * @type {string}
      * @memberof InlineObject3
      */
-    description: string;
+    scene: InlineObject3SceneEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineObject3SceneEnum {
+    Register = 'register',
+    ResetPassword = 'reset_password'
+}
+
 
 

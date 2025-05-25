@@ -294,4 +294,66 @@ export const groupsService = {
       throw new Error(error.message || '移除成员失败');
     }
   },
+
+  /**
+   * 获取用户组的入组申请列表
+   * @param groupId 用户组ID
+   * @param status 申请状态，默认为'pending'
+   * @returns 入组申请列表
+   */
+  getGroupJoinRequests: async (
+    groupId: number,
+    status: 'pending' | 'approved' | 'rejected' | 'all' = 'pending'
+  ): Promise<JoinRequest[]> => {
+    try {
+      const response = await groupsApi.groupsGroupIdJoinRequestsGet(
+        groupId,
+        status as any
+      );
+
+      if (
+        response.data.code === BaseResponseCodeEnum._0 &&
+        response.data.data
+      ) {
+        return response.data.data as JoinRequest[];
+      }
+
+      throw new Error('获取入组申请列表失败');
+    } catch (error: any) {
+      console.error('获取入组申请列表出错:', error);
+      throw new Error(error.message || '获取入组申请列表失败');
+    }
+  },
+
+  /**
+   * 获取用户组的签到审核申请列表
+   * @param groupId 用户组ID
+   * @param status 申请状态，默认为'pending'
+   * @returns 审核申请列表
+   */
+  getGroupAuditRequests: async (
+    groupId: number,
+    status: 'pending' | 'processed' | 'all' = 'pending'
+  ): Promise<any[]> => {
+    try {
+      const { auditRequestsApi } = await import('@/request');
+
+      const response = await auditRequestsApi.groupsGroupIdAuditRequestsGet(
+        groupId,
+        status as any
+      );
+
+      if (
+        response.data.code === BaseResponseCodeEnum._0 &&
+        response.data.data
+      ) {
+        return response.data.data as any[];
+      }
+
+      throw new Error('获取审核申请列表失败');
+    } catch (error: any) {
+      console.error('获取审核申请列表出错:', error);
+      throw new Error(error.message || '获取审核申请列表失败');
+    }
+  },
 };

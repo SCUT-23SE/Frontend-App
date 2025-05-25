@@ -16,6 +16,7 @@ import {
   ExportApi,
   FaceApi,
 } from '../gen/api';
+import { handleApiError } from './errorHandler';
 
 // 创建授权相关API实例
 export const authApi = new AuthApi(apiConfiguration, undefined, axiosInstance);
@@ -82,6 +83,12 @@ export const faceApi = new FaceApi(
  */
 import { saveToken, clearToken } from './client';
 
+/**
+ * 登录函数
+ * @param username 用户名
+ * @param password 密码
+ * @returns 成功时返回响应数据，失败时抛出错误（由调用方捕获处理）
+ */
 export const login = async (username: string, password: string) => {
   try {
     const response = await authApi.authLoginPost({
@@ -103,13 +110,10 @@ export const login = async (username: string, password: string) => {
     // 确保token不为undefined或null再保存
     if (token) {
       await saveToken(token);
-    } else {
-      console.error('登录接口返回的token为空');
-      console.log(response);
     }
     return response.data;
   } catch (error) {
-    // 错误会被拦截器捕获并处理
+    // 不记录错误，直接抛出，由调用方处理
     throw error;
   }
 };

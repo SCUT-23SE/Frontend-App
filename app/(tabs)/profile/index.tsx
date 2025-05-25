@@ -1,6 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Camera, Settings, LogOut, ChevronRight, History } from 'lucide-react-native';
+import {
+  Camera,
+  Settings,
+  LogOut,
+  ChevronRight,
+  History,
+} from 'lucide-react-native';
 import { useAuth } from '@/stores/auth';
 
 export default function ProfileScreen() {
@@ -19,14 +25,14 @@ export default function ProfileScreen() {
       id: 'face',
       title: '人脸信息管理',
       icon: Camera,
-      color: '#4A90E2',
+      color: '#007AFF',
       onPress: () => router.push('/profile/face-management'),
     },
     {
       id: 'settings',
       title: '设置',
       icon: Settings,
-      color: '#4CAF50',
+      color: '#34C759',
       onPress: () => router.push('/profile/settings'),
     },
   ];
@@ -51,26 +57,36 @@ export default function ProfileScreen() {
       </View>
 
       <View style={styles.menuSection}>
-        {menuItems.map((item) => (
+        {menuItems.map((item, index) => (
           <TouchableOpacity
             key={item.id}
-            style={styles.menuItem}
+            style={[
+              styles.menuItem,
+              index === menuItems.length - 1 && styles.menuItemLast,
+            ]}
             onPress={item.onPress}
           >
-            <View style={styles.menuIcon}>
-              <item.icon size={24} color={item.color} />
+            <View
+              style={[
+                styles.iconContainer,
+                { backgroundColor: `${item.color}1A` },
+              ]}
+            >
+              <item.icon size={20} color={item.color} />
             </View>
-            <View style={styles.menuContent}>
-              <Text style={styles.menuTitle}>{item.title}</Text>
-            </View>
-            <ChevronRight size={20} color="#999" />
+            <Text style={styles.menuItemText}>{item.title}</Text>
+            <ChevronRight
+              size={18}
+              color="#C7C7CC"
+              style={styles.chevronIcon}
+            />
           </TouchableOpacity>
         ))}
       </View>
 
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <LogOut size={20} color="#F44336" />
-        <Text style={styles.logoutText}>退出登录</Text>
+      <TouchableOpacity style={styles.logoutButtonCard} onPress={handleLogout}>
+        <LogOut size={20} color="#FF3B30" />
+        <Text style={styles.logoutButtonText}>退出登录</Text>
       </TouchableOpacity>
     </View>
   );
@@ -79,29 +95,28 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F8F8FA',
   },
   header: {
-    backgroundColor: '#fff',
+    marginBottom: 12,
+
+    backgroundColor: 'white',
     padding: 20,
     alignItems: 'center',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 6,
   },
   avatarContainer: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#4A90E2',
+    backgroundColor: '#007AFF',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   avatarText: {
     fontSize: 32,
@@ -111,52 +126,70 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#333',
+    color: '#000',
   },
   menuSection: {
-    backgroundColor: '#fff',
+    marginHorizontal: 16,
     marginTop: 12,
-    borderRadius: 12,
-    marginHorizontal: 12,
-    padding: 8,
+    marginBottom: 24,
+    backgroundColor: 'white',
+    borderRadius: 14,
+    overflow: 'hidden',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 6,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    borderRadius: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#EEEEEF',
   },
-  menuIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F8FF',
+  menuItemLast: {
+    borderBottomWidth: 0,
+  },
+  iconContainer: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 14,
   },
-  menuContent: {
+  menuItemText: {
     flex: 1,
+    fontSize: 15,
+    color: '#000',
+    fontWeight: '400',
   },
-  menuTitle: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '500',
+  chevronIcon: {
+    marginLeft: 8,
   },
-  logoutButton: {
+  logoutButtonCard: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    marginTop: 12,
-    marginHorizontal: 12,
-    padding: 16,
-    borderRadius: 12,
+    marginHorizontal: 16,
+    marginTop: 0,
+    marginBottom: 24,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 6,
   },
-  logoutText: {
-    fontSize: 16,
-    color: '#F44336',
+  logoutButtonText: {
+    fontSize: 15,
+    color: '#FF3B30',
     marginLeft: 8,
-    fontWeight: '500',
+    fontWeight: '400',
   },
 });

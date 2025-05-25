@@ -20,17 +20,17 @@
  */
 export interface InlineObject2 {
     /**
-     * 用户组名称
+     * 用户名
      * @type {string}
      * @memberof InlineObject2
      */
-    groupName: string;
+    username: string;
     /**
-     * 用户组描述
+     * 密码
      * @type {string}
      * @memberof InlineObject2
      */
-    description?: string;
+    password: string;
 }
 
 

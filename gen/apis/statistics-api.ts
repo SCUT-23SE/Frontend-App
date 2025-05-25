@@ -38,128 +38,6 @@ export const StatisticsApiAxiosParamCreator = function (
 ) {
   return {
     /**
-     * 获取每日签到统计数据，按日期分组展示
-     * @summary 获取每日签到统计
-     * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-     * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-     * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statisticsDailyGet: async (
-      groupId?: number,
-      startDate?: number,
-      endDate?: number,
-      options: any = {}
-    ): Promise<RequestArgs> => {
-      const localVarPath = `/statistics/daily`;
-      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-      const localVarRequestOptions = {
-        method: 'GET',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      if (groupId !== undefined) {
-        localVarQueryParameter['groupId'] = groupId;
-      }
-
-      if (startDate !== undefined) {
-        localVarQueryParameter['startDate'] = startDate;
-      }
-
-      if (endDate !== undefined) {
-        localVarQueryParameter['endDate'] = endDate;
-      }
-
-      localVarUrlObj.query = {
-        ...localVarUrlObj.query,
-        ...localVarQueryParameter,
-        ...options.query,
-      };
-      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-      delete localVarUrlObj.search;
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: globalImportUrl.format(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     * 获取每日签到统计数据，按日期分组展示
-     * @summary 获取每日签到统计
-     * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-     * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-     * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statisticsDailyGet_1: async (
-      groupId?: number,
-      startDate?: number,
-      endDate?: number,
-      options: any = {}
-    ): Promise<RequestArgs> => {
-      const localVarPath = `/statistics/daily`;
-      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-      const localVarRequestOptions = {
-        method: 'GET',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      if (groupId !== undefined) {
-        localVarQueryParameter['groupId'] = groupId;
-      }
-
-      if (startDate !== undefined) {
-        localVarQueryParameter['startDate'] = startDate;
-      }
-
-      if (endDate !== undefined) {
-        localVarQueryParameter['endDate'] = endDate;
-      }
-
-      localVarUrlObj.query = {
-        ...localVarUrlObj.query,
-        ...localVarQueryParameter,
-        ...options.query,
-      };
-      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-      delete localVarUrlObj.search;
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: globalImportUrl.format(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
      * 获取所有用户组的签到统计数据，包括成功的、缺勤的等
      * @summary 获取用户组签到统计数据
      * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
@@ -222,7 +100,7 @@ export const StatisticsApiAxiosParamCreator = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    statisticsGroupsGet_2: async (
+    statisticsGroupsGet_1: async (
       startDate?: number,
       endDate?: number,
       options: any = {}
@@ -339,7 +217,7 @@ export const StatisticsApiAxiosParamCreator = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    statisticsUsersGet_3: async (
+    statisticsUsersGet_2: async (
       groupId?: number,
       startDate?: number,
       endDate?: number,
@@ -401,74 +279,6 @@ export const StatisticsApiAxiosParamCreator = function (
 export const StatisticsApiFp = function (configuration?: Configuration) {
   return {
     /**
-     * 获取每日签到统计数据，按日期分组展示
-     * @summary 获取每日签到统计
-     * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-     * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-     * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async statisticsDailyGet(
-      groupId?: number,
-      startDate?: number,
-      endDate?: number,
-      options?: any
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<SuccessWithData & object>
-    > {
-      const localVarAxiosArgs = await StatisticsApiAxiosParamCreator(
-        configuration
-      ).statisticsDailyGet(groupId, startDate, endDate, options);
-      return (
-        axios: AxiosInstance = globalAxios,
-        basePath: string = BASE_PATH
-      ) => {
-        const axiosRequestArgs = {
-          ...localVarAxiosArgs.options,
-          url: basePath + localVarAxiosArgs.url,
-        };
-        return axios.request(axiosRequestArgs);
-      };
-    },
-    /**
-     * 获取每日签到统计数据，按日期分组展示
-     * @summary 获取每日签到统计
-     * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-     * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-     * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async statisticsDailyGet_1(
-      groupId?: number,
-      startDate?: number,
-      endDate?: number,
-      options?: any
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<SuccessWithData & object>
-    > {
-      const localVarAxiosArgs = await StatisticsApiAxiosParamCreator(
-        configuration
-      ).statisticsDailyGet_1(groupId, startDate, endDate, options);
-      return (
-        axios: AxiosInstance = globalAxios,
-        basePath: string = BASE_PATH
-      ) => {
-        const axiosRequestArgs = {
-          ...localVarAxiosArgs.options,
-          url: basePath + localVarAxiosArgs.url,
-        };
-        return axios.request(axiosRequestArgs);
-      };
-    },
-    /**
      * 获取所有用户组的签到统计数据，包括成功的、缺勤的等
      * @summary 获取用户组签到统计数据
      * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
@@ -508,7 +318,7 @@ export const StatisticsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async statisticsGroupsGet_2(
+    async statisticsGroupsGet_1(
       startDate?: number,
       endDate?: number,
       options?: any
@@ -520,7 +330,7 @@ export const StatisticsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await StatisticsApiAxiosParamCreator(
         configuration
-      ).statisticsGroupsGet_2(startDate, endDate, options);
+      ).statisticsGroupsGet_1(startDate, endDate, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -575,7 +385,7 @@ export const StatisticsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async statisticsUsersGet_3(
+    async statisticsUsersGet_2(
       groupId?: number,
       startDate?: number,
       endDate?: number,
@@ -588,7 +398,7 @@ export const StatisticsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await StatisticsApiAxiosParamCreator(
         configuration
-      ).statisticsUsersGet_3(groupId, startDate, endDate, options);
+      ).statisticsUsersGet_2(groupId, startDate, endDate, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -614,44 +424,6 @@ export const StatisticsApiFactory = function (
 ) {
   return {
     /**
-     * 获取每日签到统计数据，按日期分组展示
-     * @summary 获取每日签到统计
-     * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-     * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-     * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statisticsDailyGet(
-      groupId?: number,
-      startDate?: number,
-      endDate?: number,
-      options?: any
-    ): AxiosPromise<SuccessWithData & object> {
-      return StatisticsApiFp(configuration)
-        .statisticsDailyGet(groupId, startDate, endDate, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     * 获取每日签到统计数据，按日期分组展示
-     * @summary 获取每日签到统计
-     * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-     * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-     * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statisticsDailyGet_1(
-      groupId?: number,
-      startDate?: number,
-      endDate?: number,
-      options?: any
-    ): AxiosPromise<SuccessWithData & object> {
-      return StatisticsApiFp(configuration)
-        .statisticsDailyGet_1(groupId, startDate, endDate, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
      * 获取所有用户组的签到统计数据，包括成功的、缺勤的等
      * @summary 获取用户组签到统计数据
      * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
@@ -676,13 +448,13 @@ export const StatisticsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    statisticsGroupsGet_2(
+    statisticsGroupsGet_1(
       startDate?: number,
       endDate?: number,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return StatisticsApiFp(configuration)
-        .statisticsGroupsGet_2(startDate, endDate, options)
+        .statisticsGroupsGet_1(startDate, endDate, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -713,14 +485,14 @@ export const StatisticsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    statisticsUsersGet_3(
+    statisticsUsersGet_2(
       groupId?: number,
       startDate?: number,
       endDate?: number,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return StatisticsApiFp(configuration)
-        .statisticsUsersGet_3(groupId, startDate, endDate, options)
+        .statisticsUsersGet_2(groupId, startDate, endDate, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -733,48 +505,6 @@ export const StatisticsApiFactory = function (
  * @extends {BaseAPI}
  */
 export class StatisticsApi extends BaseAPI {
-  /**
-   * 获取每日签到统计数据，按日期分组展示
-   * @summary 获取每日签到统计
-   * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-   * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-   * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof StatisticsApi
-   */
-  public statisticsDailyGet(
-    groupId?: number,
-    startDate?: number,
-    endDate?: number,
-    options?: any
-  ) {
-    return StatisticsApiFp(this.configuration)
-      .statisticsDailyGet(groupId, startDate, endDate, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   * 获取每日签到统计数据，按日期分组展示
-   * @summary 获取每日签到统计
-   * @param {number} [groupId] 用户组ID（可选，筛选特定用户组的统计数据）
-   * @param {number} [startDate] 开始日期（Unix时间戳，单位：秒）
-   * @param {number} [endDate] 结束日期（Unix时间戳，单位：秒）
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof StatisticsApi
-   */
-  public statisticsDailyGet_1(
-    groupId?: number,
-    startDate?: number,
-    endDate?: number,
-    options?: any
-  ) {
-    return StatisticsApiFp(this.configuration)
-      .statisticsDailyGet_1(groupId, startDate, endDate, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
   /**
    * 获取所有用户组的签到统计数据，包括成功的、缺勤的等
    * @summary 获取用户组签到统计数据
@@ -803,13 +533,13 @@ export class StatisticsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof StatisticsApi
    */
-  public statisticsGroupsGet_2(
+  public statisticsGroupsGet_1(
     startDate?: number,
     endDate?: number,
     options?: any
   ) {
     return StatisticsApiFp(this.configuration)
-      .statisticsGroupsGet_2(startDate, endDate, options)
+      .statisticsGroupsGet_1(startDate, endDate, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -844,14 +574,14 @@ export class StatisticsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof StatisticsApi
    */
-  public statisticsUsersGet_3(
+  public statisticsUsersGet_2(
     groupId?: number,
     startDate?: number,
     endDate?: number,
     options?: any
   ) {
     return StatisticsApiFp(this.configuration)
-      .statisticsUsersGet_3(groupId, startDate, endDate, options)
+      .statisticsUsersGet_2(groupId, startDate, endDate, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

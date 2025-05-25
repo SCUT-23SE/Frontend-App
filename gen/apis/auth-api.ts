@@ -26,13 +26,29 @@ import {
 // @ts-ignore
 import { BadRequest } from '../models';
 // @ts-ignore
+import { BaseResponse } from '../models';
+// @ts-ignore
 import { Conflict } from '../models';
+// @ts-ignore
+import { Forbidden } from '../models';
+// @ts-ignore
+import { Gone } from '../models';
 // @ts-ignore
 import { InlineObject } from '../models';
 // @ts-ignore
 import { InlineObject1 } from '../models';
 // @ts-ignore
+import { InlineObject2 } from '../models';
+// @ts-ignore
+import { InlineObject3 } from '../models';
+// @ts-ignore
+import { InlineObject4 } from '../models';
+// @ts-ignore
 import { InternalServerError } from '../models';
+// @ts-ignore
+import { NotFound } from '../models';
+// @ts-ignore
+import { Success } from '../models';
 // @ts-ignore
 import { SuccessWithData } from '../models';
 // @ts-ignore
@@ -45,6 +61,112 @@ export const AuthApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
+    /**
+     * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+     * @summary 管理员登录
+     * @param {InlineObject2} [inlineObject2]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authAdminLoginPost: async (
+      inlineObject2?: InlineObject2,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/auth/admin/login`;
+      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = {
+        ...localVarUrlObj.query,
+        ...localVarQueryParameter,
+        ...options.query,
+      };
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      const needsSerialization =
+        typeof inlineObject2 !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization
+        ? JSON.stringify(inlineObject2 !== undefined ? inlineObject2 : {})
+        : inlineObject2 || '';
+
+      return {
+        url: globalImportUrl.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+     * @summary 管理员登录
+     * @param {InlineObject2} [inlineObject2]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authAdminLoginPost_1: async (
+      inlineObject2?: InlineObject2,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/auth/admin/login`;
+      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = {
+        ...localVarUrlObj.query,
+        ...localVarQueryParameter,
+        ...options.query,
+      };
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      const needsSerialization =
+        typeof inlineObject2 !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization
+        ? JSON.stringify(inlineObject2 !== undefined ? inlineObject2 : {})
+        : inlineObject2 || '';
+
+      return {
+        url: globalImportUrl.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
     /**
      * 用户使用用户名和密码登录，获取 JWT。
      * @summary 用户登录
@@ -105,7 +227,7 @@ export const AuthApiAxiosParamCreator = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authLoginPost_1: async (
+    authLoginPost_2: async (
       inlineObject1?: InlineObject1,
       options: any = {}
     ): Promise<RequestArgs> => {
@@ -152,8 +274,8 @@ export const AuthApiAxiosParamCreator = function (
       };
     },
     /**
-     * 新用户使用用户名和密码注册。
-     * @summary 用户注册
+     * 用户验证邮箱并提供用户信息，完成注册流程
+     * @summary 验证邮箱并进行用户注册
      * @param {InlineObject} [inlineObject]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -205,13 +327,13 @@ export const AuthApiAxiosParamCreator = function (
       };
     },
     /**
-     * 新用户使用用户名和密码注册。
-     * @summary 用户注册
+     * 用户验证邮箱并提供用户信息，完成注册流程
+     * @summary 验证邮箱并进行用户注册
      * @param {InlineObject} [inlineObject]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authRegisterPost_2: async (
+    authRegisterPost_3: async (
       inlineObject?: InlineObject,
       options: any = {}
     ): Promise<RequestArgs> => {
@@ -257,6 +379,218 @@ export const AuthApiAxiosParamCreator = function (
         options: localVarRequestOptions,
       };
     },
+    /**
+     * 用户通过邮箱验证码重置密码
+     * @summary 重置密码
+     * @param {InlineObject4} [inlineObject4]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authResetPasswordPost: async (
+      inlineObject4?: InlineObject4,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/auth/reset-password`;
+      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = {
+        ...localVarUrlObj.query,
+        ...localVarQueryParameter,
+        ...options.query,
+      };
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      const needsSerialization =
+        typeof inlineObject4 !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization
+        ? JSON.stringify(inlineObject4 !== undefined ? inlineObject4 : {})
+        : inlineObject4 || '';
+
+      return {
+        url: globalImportUrl.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * 用户通过邮箱验证码重置密码
+     * @summary 重置密码
+     * @param {InlineObject4} [inlineObject4]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authResetPasswordPost_4: async (
+      inlineObject4?: InlineObject4,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/auth/reset-password`;
+      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = {
+        ...localVarUrlObj.query,
+        ...localVarQueryParameter,
+        ...options.query,
+      };
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      const needsSerialization =
+        typeof inlineObject4 !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization
+        ? JSON.stringify(inlineObject4 !== undefined ? inlineObject4 : {})
+        : inlineObject4 || '';
+
+      return {
+        url: globalImportUrl.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+     * @summary 发送验证码
+     * @param {InlineObject3} [inlineObject3]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authSendVerificationCodePost: async (
+      inlineObject3?: InlineObject3,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/auth/send-verification-code`;
+      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = {
+        ...localVarUrlObj.query,
+        ...localVarQueryParameter,
+        ...options.query,
+      };
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      const needsSerialization =
+        typeof inlineObject3 !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization
+        ? JSON.stringify(inlineObject3 !== undefined ? inlineObject3 : {})
+        : inlineObject3 || '';
+
+      return {
+        url: globalImportUrl.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+     * @summary 发送验证码
+     * @param {InlineObject3} [inlineObject3]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authSendVerificationCodePost_5: async (
+      inlineObject3?: InlineObject3,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/auth/send-verification-code`;
+      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = {
+        ...localVarUrlObj.query,
+        ...localVarQueryParameter,
+        ...options.query,
+      };
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      const needsSerialization =
+        typeof inlineObject3 !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization
+        ? JSON.stringify(inlineObject3 !== undefined ? inlineObject3 : {})
+        : inlineObject3 || '';
+
+      return {
+        url: globalImportUrl.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
   };
 };
 
@@ -266,6 +600,66 @@ export const AuthApiAxiosParamCreator = function (
  */
 export const AuthApiFp = function (configuration?: Configuration) {
   return {
+    /**
+     * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+     * @summary 管理员登录
+     * @param {InlineObject2} [inlineObject2]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async authAdminLoginPost(
+      inlineObject2?: InlineObject2,
+      options?: any
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<SuccessWithData & object>
+    > {
+      const localVarAxiosArgs = await AuthApiAxiosParamCreator(
+        configuration
+      ).authAdminLoginPost(inlineObject2, options);
+      return (
+        axios: AxiosInstance = globalAxios,
+        basePath: string = BASE_PATH
+      ) => {
+        const axiosRequestArgs = {
+          ...localVarAxiosArgs.options,
+          url: basePath + localVarAxiosArgs.url,
+        };
+        return axios.request(axiosRequestArgs);
+      };
+    },
+    /**
+     * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+     * @summary 管理员登录
+     * @param {InlineObject2} [inlineObject2]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async authAdminLoginPost_1(
+      inlineObject2?: InlineObject2,
+      options?: any
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<SuccessWithData & object>
+    > {
+      const localVarAxiosArgs = await AuthApiAxiosParamCreator(
+        configuration
+      ).authAdminLoginPost_1(inlineObject2, options);
+      return (
+        axios: AxiosInstance = globalAxios,
+        basePath: string = BASE_PATH
+      ) => {
+        const axiosRequestArgs = {
+          ...localVarAxiosArgs.options,
+          url: basePath + localVarAxiosArgs.url,
+        };
+        return axios.request(axiosRequestArgs);
+      };
+    },
     /**
      * 用户使用用户名和密码登录，获取 JWT。
      * @summary 用户登录
@@ -303,7 +697,7 @@ export const AuthApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async authLoginPost_1(
+    async authLoginPost_2(
       inlineObject1?: InlineObject1,
       options?: any
     ): Promise<
@@ -314,7 +708,7 @@ export const AuthApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await AuthApiAxiosParamCreator(
         configuration
-      ).authLoginPost_1(inlineObject1, options);
+      ).authLoginPost_2(inlineObject1, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -327,8 +721,8 @@ export const AuthApiFp = function (configuration?: Configuration) {
       };
     },
     /**
-     * 新用户使用用户名和密码注册。
-     * @summary 用户注册
+     * 用户验证邮箱并提供用户信息，完成注册流程
+     * @summary 验证邮箱并进行用户注册
      * @param {InlineObject} [inlineObject]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -357,13 +751,13 @@ export const AuthApiFp = function (configuration?: Configuration) {
       };
     },
     /**
-     * 新用户使用用户名和密码注册。
-     * @summary 用户注册
+     * 用户验证邮箱并提供用户信息，完成注册流程
+     * @summary 验证邮箱并进行用户注册
      * @param {InlineObject} [inlineObject]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async authRegisterPost_2(
+    async authRegisterPost_3(
       inlineObject?: InlineObject,
       options?: any
     ): Promise<
@@ -374,7 +768,121 @@ export const AuthApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await AuthApiAxiosParamCreator(
         configuration
-      ).authRegisterPost_2(inlineObject, options);
+      ).authRegisterPost_3(inlineObject, options);
+      return (
+        axios: AxiosInstance = globalAxios,
+        basePath: string = BASE_PATH
+      ) => {
+        const axiosRequestArgs = {
+          ...localVarAxiosArgs.options,
+          url: basePath + localVarAxiosArgs.url,
+        };
+        return axios.request(axiosRequestArgs);
+      };
+    },
+    /**
+     * 用户通过邮箱验证码重置密码
+     * @summary 重置密码
+     * @param {InlineObject4} [inlineObject4]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async authResetPasswordPost(
+      inlineObject4?: InlineObject4,
+      options?: any
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Success>
+    > {
+      const localVarAxiosArgs = await AuthApiAxiosParamCreator(
+        configuration
+      ).authResetPasswordPost(inlineObject4, options);
+      return (
+        axios: AxiosInstance = globalAxios,
+        basePath: string = BASE_PATH
+      ) => {
+        const axiosRequestArgs = {
+          ...localVarAxiosArgs.options,
+          url: basePath + localVarAxiosArgs.url,
+        };
+        return axios.request(axiosRequestArgs);
+      };
+    },
+    /**
+     * 用户通过邮箱验证码重置密码
+     * @summary 重置密码
+     * @param {InlineObject4} [inlineObject4]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async authResetPasswordPost_4(
+      inlineObject4?: InlineObject4,
+      options?: any
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Success>
+    > {
+      const localVarAxiosArgs = await AuthApiAxiosParamCreator(
+        configuration
+      ).authResetPasswordPost_4(inlineObject4, options);
+      return (
+        axios: AxiosInstance = globalAxios,
+        basePath: string = BASE_PATH
+      ) => {
+        const axiosRequestArgs = {
+          ...localVarAxiosArgs.options,
+          url: basePath + localVarAxiosArgs.url,
+        };
+        return axios.request(axiosRequestArgs);
+      };
+    },
+    /**
+     * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+     * @summary 发送验证码
+     * @param {InlineObject3} [inlineObject3]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async authSendVerificationCodePost(
+      inlineObject3?: InlineObject3,
+      options?: any
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Success & object>
+    > {
+      const localVarAxiosArgs = await AuthApiAxiosParamCreator(
+        configuration
+      ).authSendVerificationCodePost(inlineObject3, options);
+      return (
+        axios: AxiosInstance = globalAxios,
+        basePath: string = BASE_PATH
+      ) => {
+        const axiosRequestArgs = {
+          ...localVarAxiosArgs.options,
+          url: basePath + localVarAxiosArgs.url,
+        };
+        return axios.request(axiosRequestArgs);
+      };
+    },
+    /**
+     * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+     * @summary 发送验证码
+     * @param {InlineObject3} [inlineObject3]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async authSendVerificationCodePost_5(
+      inlineObject3?: InlineObject3,
+      options?: any
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Success & object>
+    > {
+      const localVarAxiosArgs = await AuthApiAxiosParamCreator(
+        configuration
+      ).authSendVerificationCodePost_5(inlineObject3, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -400,6 +908,36 @@ export const AuthApiFactory = function (
 ) {
   return {
     /**
+     * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+     * @summary 管理员登录
+     * @param {InlineObject2} [inlineObject2]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authAdminLoginPost(
+      inlineObject2?: InlineObject2,
+      options?: any
+    ): AxiosPromise<SuccessWithData & object> {
+      return AuthApiFp(configuration)
+        .authAdminLoginPost(inlineObject2, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+     * @summary 管理员登录
+     * @param {InlineObject2} [inlineObject2]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authAdminLoginPost_1(
+      inlineObject2?: InlineObject2,
+      options?: any
+    ): AxiosPromise<SuccessWithData & object> {
+      return AuthApiFp(configuration)
+        .authAdminLoginPost_1(inlineObject2, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
      * 用户使用用户名和密码登录，获取 JWT。
      * @summary 用户登录
      * @param {InlineObject1} [inlineObject1]
@@ -421,17 +959,17 @@ export const AuthApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authLoginPost_1(
+    authLoginPost_2(
       inlineObject1?: InlineObject1,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return AuthApiFp(configuration)
-        .authLoginPost_1(inlineObject1, options)
+        .authLoginPost_2(inlineObject1, options)
         .then((request) => request(axios, basePath));
     },
     /**
-     * 新用户使用用户名和密码注册。
-     * @summary 用户注册
+     * 用户验证邮箱并提供用户信息，完成注册流程
+     * @summary 验证邮箱并进行用户注册
      * @param {InlineObject} [inlineObject]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -445,18 +983,78 @@ export const AuthApiFactory = function (
         .then((request) => request(axios, basePath));
     },
     /**
-     * 新用户使用用户名和密码注册。
-     * @summary 用户注册
+     * 用户验证邮箱并提供用户信息，完成注册流程
+     * @summary 验证邮箱并进行用户注册
      * @param {InlineObject} [inlineObject]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authRegisterPost_2(
+    authRegisterPost_3(
       inlineObject?: InlineObject,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return AuthApiFp(configuration)
-        .authRegisterPost_2(inlineObject, options)
+        .authRegisterPost_3(inlineObject, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     * 用户通过邮箱验证码重置密码
+     * @summary 重置密码
+     * @param {InlineObject4} [inlineObject4]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authResetPasswordPost(
+      inlineObject4?: InlineObject4,
+      options?: any
+    ): AxiosPromise<Success> {
+      return AuthApiFp(configuration)
+        .authResetPasswordPost(inlineObject4, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     * 用户通过邮箱验证码重置密码
+     * @summary 重置密码
+     * @param {InlineObject4} [inlineObject4]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authResetPasswordPost_4(
+      inlineObject4?: InlineObject4,
+      options?: any
+    ): AxiosPromise<Success> {
+      return AuthApiFp(configuration)
+        .authResetPasswordPost_4(inlineObject4, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+     * @summary 发送验证码
+     * @param {InlineObject3} [inlineObject3]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authSendVerificationCodePost(
+      inlineObject3?: InlineObject3,
+      options?: any
+    ): AxiosPromise<Success & object> {
+      return AuthApiFp(configuration)
+        .authSendVerificationCodePost(inlineObject3, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+     * @summary 发送验证码
+     * @param {InlineObject3} [inlineObject3]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authSendVerificationCodePost_5(
+      inlineObject3?: InlineObject3,
+      options?: any
+    ): AxiosPromise<Success & object> {
+      return AuthApiFp(configuration)
+        .authSendVerificationCodePost_5(inlineObject3, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -469,6 +1067,34 @@ export const AuthApiFactory = function (
  * @extends {BaseAPI}
  */
 export class AuthApi extends BaseAPI {
+  /**
+   * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+   * @summary 管理员登录
+   * @param {InlineObject2} [inlineObject2]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AuthApi
+   */
+  public authAdminLoginPost(inlineObject2?: InlineObject2, options?: any) {
+    return AuthApiFp(this.configuration)
+      .authAdminLoginPost(inlineObject2, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   * 拥有群组的管理员用户登录管理后台，获取管理员 JWT。
+   * @summary 管理员登录
+   * @param {InlineObject2} [inlineObject2]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AuthApi
+   */
+  public authAdminLoginPost_1(inlineObject2?: InlineObject2, options?: any) {
+    return AuthApiFp(this.configuration)
+      .authAdminLoginPost_1(inlineObject2, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
   /**
    * 用户使用用户名和密码登录，获取 JWT。
    * @summary 用户登录
@@ -491,15 +1117,15 @@ export class AuthApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof AuthApi
    */
-  public authLoginPost_1(inlineObject1?: InlineObject1, options?: any) {
+  public authLoginPost_2(inlineObject1?: InlineObject1, options?: any) {
     return AuthApiFp(this.configuration)
-      .authLoginPost_1(inlineObject1, options)
+      .authLoginPost_2(inlineObject1, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
-   * 新用户使用用户名和密码注册。
-   * @summary 用户注册
+   * 用户验证邮箱并提供用户信息，完成注册流程
+   * @summary 验证邮箱并进行用户注册
    * @param {InlineObject} [inlineObject]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -512,16 +1138,78 @@ export class AuthApi extends BaseAPI {
   }
 
   /**
-   * 新用户使用用户名和密码注册。
-   * @summary 用户注册
+   * 用户验证邮箱并提供用户信息，完成注册流程
+   * @summary 验证邮箱并进行用户注册
    * @param {InlineObject} [inlineObject]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AuthApi
    */
-  public authRegisterPost_2(inlineObject?: InlineObject, options?: any) {
+  public authRegisterPost_3(inlineObject?: InlineObject, options?: any) {
     return AuthApiFp(this.configuration)
-      .authRegisterPost_2(inlineObject, options)
+      .authRegisterPost_3(inlineObject, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   * 用户通过邮箱验证码重置密码
+   * @summary 重置密码
+   * @param {InlineObject4} [inlineObject4]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AuthApi
+   */
+  public authResetPasswordPost(inlineObject4?: InlineObject4, options?: any) {
+    return AuthApiFp(this.configuration)
+      .authResetPasswordPost(inlineObject4, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   * 用户通过邮箱验证码重置密码
+   * @summary 重置密码
+   * @param {InlineObject4} [inlineObject4]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AuthApi
+   */
+  public authResetPasswordPost_4(inlineObject4?: InlineObject4, options?: any) {
+    return AuthApiFp(this.configuration)
+      .authResetPasswordPost_4(inlineObject4, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+   * @summary 发送验证码
+   * @param {InlineObject3} [inlineObject3]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AuthApi
+   */
+  public authSendVerificationCodePost(
+    inlineObject3?: InlineObject3,
+    options?: any
+  ) {
+    return AuthApiFp(this.configuration)
+      .authSendVerificationCodePost(inlineObject3, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   * 根据场景发送验证码到用户邮箱，可用于邮箱验证、密码重置等场景
+   * @summary 发送验证码
+   * @param {InlineObject3} [inlineObject3]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AuthApi
+   */
+  public authSendVerificationCodePost_5(
+    inlineObject3?: InlineObject3,
+    options?: any
+  ) {
+    return AuthApiFp(this.configuration)
+      .authSendVerificationCodePost_5(inlineObject3, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

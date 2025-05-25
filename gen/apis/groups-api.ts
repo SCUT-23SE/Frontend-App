@@ -30,13 +30,13 @@ import { Conflict } from '../models';
 // @ts-ignore
 import { Forbidden } from '../models';
 // @ts-ignore
-import { InlineObject2 } from '../models';
-// @ts-ignore
-import { InlineObject3 } from '../models';
-// @ts-ignore
-import { InlineObject4 } from '../models';
-// @ts-ignore
 import { InlineObject5 } from '../models';
+// @ts-ignore
+import { InlineObject6 } from '../models';
+// @ts-ignore
+import { InlineObject7 } from '../models';
+// @ts-ignore
+import { InlineObject8 } from '../models';
 // @ts-ignore
 import { InternalServerError } from '../models';
 // @ts-ignore
@@ -501,13 +501,13 @@ export const GroupsApiAxiosParamCreator = function (
      * 用户向指定用户组提交加入申请。
      * @summary 申请加入用户组
      * @param {number} groupId 目标用户组 ID
-     * @param {InlineObject4} [inlineObject4]
+     * @param {InlineObject7} [inlineObject7]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsPost: async (
       groupId: number,
-      inlineObject4?: InlineObject4,
+      inlineObject7?: InlineObject7,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -551,11 +551,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject4 !== 'string' ||
+        typeof inlineObject7 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject4 !== undefined ? inlineObject4 : {})
-        : inlineObject4 || '';
+        ? JSON.stringify(inlineObject7 !== undefined ? inlineObject7 : {})
+        : inlineObject7 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -566,13 +566,13 @@ export const GroupsApiAxiosParamCreator = function (
      * 用户向指定用户组提交加入申请。
      * @summary 申请加入用户组
      * @param {number} groupId 目标用户组 ID
-     * @param {InlineObject4} [inlineObject4]
+     * @param {InlineObject7} [inlineObject7]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsPost_5: async (
       groupId: number,
-      inlineObject4?: InlineObject4,
+      inlineObject7?: InlineObject7,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -616,11 +616,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject4 !== 'string' ||
+        typeof inlineObject7 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject4 !== undefined ? inlineObject4 : {})
-        : inlineObject4 || '';
+        ? JSON.stringify(inlineObject7 !== undefined ? inlineObject7 : {})
+        : inlineObject7 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -632,14 +632,14 @@ export const GroupsApiAxiosParamCreator = function (
      * @summary 处理用户组加入申请
      * @param {number} groupId 用户组 ID
      * @param {number} requestId 加入申请的 ID
-     * @param {InlineObject5} [inlineObject5]
+     * @param {InlineObject8} [inlineObject8]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsRequestIdPut: async (
       groupId: number,
       requestId: number,
-      inlineObject5?: InlineObject5,
+      inlineObject8?: InlineObject8,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -689,11 +689,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject5 !== 'string' ||
+        typeof inlineObject8 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject5 !== undefined ? inlineObject5 : {})
-        : inlineObject5 || '';
+        ? JSON.stringify(inlineObject8 !== undefined ? inlineObject8 : {})
+        : inlineObject8 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -705,14 +705,14 @@ export const GroupsApiAxiosParamCreator = function (
      * @summary 处理用户组加入申请
      * @param {number} groupId 用户组 ID
      * @param {number} requestId 加入申请的 ID
-     * @param {InlineObject5} [inlineObject5]
+     * @param {InlineObject8} [inlineObject8]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsRequestIdPut_6: async (
       groupId: number,
       requestId: number,
-      inlineObject5?: InlineObject5,
+      inlineObject8?: InlineObject8,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -762,11 +762,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject5 !== 'string' ||
+        typeof inlineObject8 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject5 !== undefined ? inlineObject5 : {})
-        : inlineObject5 || '';
+        ? JSON.stringify(inlineObject8 !== undefined ? inlineObject8 : {})
+        : inlineObject8 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -1123,13 +1123,13 @@ export const GroupsApiAxiosParamCreator = function (
      * 修改用户组的名称或描述。需要是该组管理员。
      * @summary 修改用户组信息
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject3} [inlineObject3]
+     * @param {InlineObject6} [inlineObject6]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdPut: async (
       groupId: number,
-      inlineObject3?: InlineObject3,
+      inlineObject6?: InlineObject6,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -1173,11 +1173,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject3 !== 'string' ||
+        typeof inlineObject6 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject3 !== undefined ? inlineObject3 : {})
-        : inlineObject3 || '';
+        ? JSON.stringify(inlineObject6 !== undefined ? inlineObject6 : {})
+        : inlineObject6 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -1188,13 +1188,13 @@ export const GroupsApiAxiosParamCreator = function (
      * 修改用户组的名称或描述。需要是该组管理员。
      * @summary 修改用户组信息
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject3} [inlineObject3]
+     * @param {InlineObject6} [inlineObject6]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdPut_10: async (
       groupId: number,
-      inlineObject3?: InlineObject3,
+      inlineObject6?: InlineObject6,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -1238,11 +1238,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject3 !== 'string' ||
+        typeof inlineObject6 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject3 !== undefined ? inlineObject3 : {})
-        : inlineObject3 || '';
+        ? JSON.stringify(inlineObject6 !== undefined ? inlineObject6 : {})
+        : inlineObject6 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -1252,12 +1252,12 @@ export const GroupsApiAxiosParamCreator = function (
     /**
      * 任何登录用户可以创建用户组，并自动成为该组管理员。
      * @summary 创建用户组
-     * @param {InlineObject2} [inlineObject2]
+     * @param {InlineObject5} [inlineObject5]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsPost: async (
-      inlineObject2?: InlineObject2,
+      inlineObject5?: InlineObject5,
       options: any = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/groups`;
@@ -1291,11 +1291,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject2 !== 'string' ||
+        typeof inlineObject5 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject2 !== undefined ? inlineObject2 : {})
-        : inlineObject2 || '';
+        ? JSON.stringify(inlineObject5 !== undefined ? inlineObject5 : {})
+        : inlineObject5 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -1305,12 +1305,12 @@ export const GroupsApiAxiosParamCreator = function (
     /**
      * 任何登录用户可以创建用户组，并自动成为该组管理员。
      * @summary 创建用户组
-     * @param {InlineObject2} [inlineObject2]
+     * @param {InlineObject5} [inlineObject5]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsPost_11: async (
-      inlineObject2?: InlineObject2,
+      inlineObject5?: InlineObject5,
       options: any = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/groups`;
@@ -1344,11 +1344,11 @@ export const GroupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject2 !== 'string' ||
+        typeof inlineObject5 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject2 !== undefined ? inlineObject2 : {})
-        : inlineObject2 || '';
+        ? JSON.stringify(inlineObject5 !== undefined ? inlineObject5 : {})
+        : inlineObject5 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -1606,13 +1606,13 @@ export const GroupsApiFp = function (configuration?: Configuration) {
      * 用户向指定用户组提交加入申请。
      * @summary 申请加入用户组
      * @param {number} groupId 目标用户组 ID
-     * @param {InlineObject4} [inlineObject4]
+     * @param {InlineObject7} [inlineObject7]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdJoinRequestsPost(
       groupId: number,
-      inlineObject4?: InlineObject4,
+      inlineObject7?: InlineObject7,
       options?: any
     ): Promise<
       (
@@ -1622,7 +1622,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await GroupsApiAxiosParamCreator(
         configuration
-      ).groupsGroupIdJoinRequestsPost(groupId, inlineObject4, options);
+      ).groupsGroupIdJoinRequestsPost(groupId, inlineObject7, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1638,13 +1638,13 @@ export const GroupsApiFp = function (configuration?: Configuration) {
      * 用户向指定用户组提交加入申请。
      * @summary 申请加入用户组
      * @param {number} groupId 目标用户组 ID
-     * @param {InlineObject4} [inlineObject4]
+     * @param {InlineObject7} [inlineObject7]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdJoinRequestsPost_5(
       groupId: number,
-      inlineObject4?: InlineObject4,
+      inlineObject7?: InlineObject7,
       options?: any
     ): Promise<
       (
@@ -1654,7 +1654,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await GroupsApiAxiosParamCreator(
         configuration
-      ).groupsGroupIdJoinRequestsPost_5(groupId, inlineObject4, options);
+      ).groupsGroupIdJoinRequestsPost_5(groupId, inlineObject7, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1671,14 +1671,14 @@ export const GroupsApiFp = function (configuration?: Configuration) {
      * @summary 处理用户组加入申请
      * @param {number} groupId 用户组 ID
      * @param {number} requestId 加入申请的 ID
-     * @param {InlineObject5} [inlineObject5]
+     * @param {InlineObject8} [inlineObject8]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdJoinRequestsRequestIdPut(
       groupId: number,
       requestId: number,
-      inlineObject5?: InlineObject5,
+      inlineObject8?: InlineObject8,
       options?: any
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Success>
@@ -1688,7 +1688,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
       ).groupsGroupIdJoinRequestsRequestIdPut(
         groupId,
         requestId,
-        inlineObject5,
+        inlineObject8,
         options
       );
       return (
@@ -1707,14 +1707,14 @@ export const GroupsApiFp = function (configuration?: Configuration) {
      * @summary 处理用户组加入申请
      * @param {number} groupId 用户组 ID
      * @param {number} requestId 加入申请的 ID
-     * @param {InlineObject5} [inlineObject5]
+     * @param {InlineObject8} [inlineObject8]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdJoinRequestsRequestIdPut_6(
       groupId: number,
       requestId: number,
-      inlineObject5?: InlineObject5,
+      inlineObject8?: InlineObject8,
       options?: any
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Success>
@@ -1724,7 +1724,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
       ).groupsGroupIdJoinRequestsRequestIdPut_6(
         groupId,
         requestId,
-        inlineObject5,
+        inlineObject8,
         options
       );
       return (
@@ -1920,13 +1920,13 @@ export const GroupsApiFp = function (configuration?: Configuration) {
      * 修改用户组的名称或描述。需要是该组管理员。
      * @summary 修改用户组信息
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject3} [inlineObject3]
+     * @param {InlineObject6} [inlineObject6]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdPut(
       groupId: number,
-      inlineObject3?: InlineObject3,
+      inlineObject6?: InlineObject6,
       options?: any
     ): Promise<
       (
@@ -1936,7 +1936,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await GroupsApiAxiosParamCreator(
         configuration
-      ).groupsGroupIdPut(groupId, inlineObject3, options);
+      ).groupsGroupIdPut(groupId, inlineObject6, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1952,13 +1952,13 @@ export const GroupsApiFp = function (configuration?: Configuration) {
      * 修改用户组的名称或描述。需要是该组管理员。
      * @summary 修改用户组信息
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject3} [inlineObject3]
+     * @param {InlineObject6} [inlineObject6]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdPut_10(
       groupId: number,
-      inlineObject3?: InlineObject3,
+      inlineObject6?: InlineObject6,
       options?: any
     ): Promise<
       (
@@ -1968,7 +1968,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await GroupsApiAxiosParamCreator(
         configuration
-      ).groupsGroupIdPut_10(groupId, inlineObject3, options);
+      ).groupsGroupIdPut_10(groupId, inlineObject6, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1983,12 +1983,12 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     /**
      * 任何登录用户可以创建用户组，并自动成为该组管理员。
      * @summary 创建用户组
-     * @param {InlineObject2} [inlineObject2]
+     * @param {InlineObject5} [inlineObject5]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsPost(
-      inlineObject2?: InlineObject2,
+      inlineObject5?: InlineObject5,
       options?: any
     ): Promise<
       (
@@ -1998,7 +1998,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await GroupsApiAxiosParamCreator(
         configuration
-      ).groupsPost(inlineObject2, options);
+      ).groupsPost(inlineObject5, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -2013,12 +2013,12 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     /**
      * 任何登录用户可以创建用户组，并自动成为该组管理员。
      * @summary 创建用户组
-     * @param {InlineObject2} [inlineObject2]
+     * @param {InlineObject5} [inlineObject5]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsPost_11(
-      inlineObject2?: InlineObject2,
+      inlineObject5?: InlineObject5,
       options?: any
     ): Promise<
       (
@@ -2028,7 +2028,7 @@ export const GroupsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await GroupsApiAxiosParamCreator(
         configuration
-      ).groupsPost_11(inlineObject2, options);
+      ).groupsPost_11(inlineObject5, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -2178,34 +2178,34 @@ export const GroupsApiFactory = function (
      * 用户向指定用户组提交加入申请。
      * @summary 申请加入用户组
      * @param {number} groupId 目标用户组 ID
-     * @param {InlineObject4} [inlineObject4]
+     * @param {InlineObject7} [inlineObject7]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsPost(
       groupId: number,
-      inlineObject4?: InlineObject4,
+      inlineObject7?: InlineObject7,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return GroupsApiFp(configuration)
-        .groupsGroupIdJoinRequestsPost(groupId, inlineObject4, options)
+        .groupsGroupIdJoinRequestsPost(groupId, inlineObject7, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 用户向指定用户组提交加入申请。
      * @summary 申请加入用户组
      * @param {number} groupId 目标用户组 ID
-     * @param {InlineObject4} [inlineObject4]
+     * @param {InlineObject7} [inlineObject7]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsPost_5(
       groupId: number,
-      inlineObject4?: InlineObject4,
+      inlineObject7?: InlineObject7,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return GroupsApiFp(configuration)
-        .groupsGroupIdJoinRequestsPost_5(groupId, inlineObject4, options)
+        .groupsGroupIdJoinRequestsPost_5(groupId, inlineObject7, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -2213,21 +2213,21 @@ export const GroupsApiFactory = function (
      * @summary 处理用户组加入申请
      * @param {number} groupId 用户组 ID
      * @param {number} requestId 加入申请的 ID
-     * @param {InlineObject5} [inlineObject5]
+     * @param {InlineObject8} [inlineObject8]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsRequestIdPut(
       groupId: number,
       requestId: number,
-      inlineObject5?: InlineObject5,
+      inlineObject8?: InlineObject8,
       options?: any
     ): AxiosPromise<Success> {
       return GroupsApiFp(configuration)
         .groupsGroupIdJoinRequestsRequestIdPut(
           groupId,
           requestId,
-          inlineObject5,
+          inlineObject8,
           options
         )
         .then((request) => request(axios, basePath));
@@ -2237,21 +2237,21 @@ export const GroupsApiFactory = function (
      * @summary 处理用户组加入申请
      * @param {number} groupId 用户组 ID
      * @param {number} requestId 加入申请的 ID
-     * @param {InlineObject5} [inlineObject5]
+     * @param {InlineObject8} [inlineObject8]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdJoinRequestsRequestIdPut_6(
       groupId: number,
       requestId: number,
-      inlineObject5?: InlineObject5,
+      inlineObject8?: InlineObject8,
       options?: any
     ): AxiosPromise<Success> {
       return GroupsApiFp(configuration)
         .groupsGroupIdJoinRequestsRequestIdPut_6(
           groupId,
           requestId,
-          inlineObject5,
+          inlineObject8,
           options
         )
         .then((request) => request(axios, basePath));
@@ -2354,64 +2354,64 @@ export const GroupsApiFactory = function (
      * 修改用户组的名称或描述。需要是该组管理员。
      * @summary 修改用户组信息
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject3} [inlineObject3]
+     * @param {InlineObject6} [inlineObject6]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdPut(
       groupId: number,
-      inlineObject3?: InlineObject3,
+      inlineObject6?: InlineObject6,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return GroupsApiFp(configuration)
-        .groupsGroupIdPut(groupId, inlineObject3, options)
+        .groupsGroupIdPut(groupId, inlineObject6, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 修改用户组的名称或描述。需要是该组管理员。
      * @summary 修改用户组信息
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject3} [inlineObject3]
+     * @param {InlineObject6} [inlineObject6]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdPut_10(
       groupId: number,
-      inlineObject3?: InlineObject3,
+      inlineObject6?: InlineObject6,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return GroupsApiFp(configuration)
-        .groupsGroupIdPut_10(groupId, inlineObject3, options)
+        .groupsGroupIdPut_10(groupId, inlineObject6, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 任何登录用户可以创建用户组，并自动成为该组管理员。
      * @summary 创建用户组
-     * @param {InlineObject2} [inlineObject2]
+     * @param {InlineObject5} [inlineObject5]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsPost(
-      inlineObject2?: InlineObject2,
+      inlineObject5?: InlineObject5,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return GroupsApiFp(configuration)
-        .groupsPost(inlineObject2, options)
+        .groupsPost(inlineObject5, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 任何登录用户可以创建用户组，并自动成为该组管理员。
      * @summary 创建用户组
-     * @param {InlineObject2} [inlineObject2]
+     * @param {InlineObject5} [inlineObject5]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsPost_11(
-      inlineObject2?: InlineObject2,
+      inlineObject5?: InlineObject5,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return GroupsApiFp(configuration)
-        .groupsPost_11(inlineObject2, options)
+        .groupsPost_11(inlineObject5, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -2550,18 +2550,18 @@ export class GroupsApi extends BaseAPI {
    * 用户向指定用户组提交加入申请。
    * @summary 申请加入用户组
    * @param {number} groupId 目标用户组 ID
-   * @param {InlineObject4} [inlineObject4]
+   * @param {InlineObject7} [inlineObject7]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
    */
   public groupsGroupIdJoinRequestsPost(
     groupId: number,
-    inlineObject4?: InlineObject4,
+    inlineObject7?: InlineObject7,
     options?: any
   ) {
     return GroupsApiFp(this.configuration)
-      .groupsGroupIdJoinRequestsPost(groupId, inlineObject4, options)
+      .groupsGroupIdJoinRequestsPost(groupId, inlineObject7, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -2569,18 +2569,18 @@ export class GroupsApi extends BaseAPI {
    * 用户向指定用户组提交加入申请。
    * @summary 申请加入用户组
    * @param {number} groupId 目标用户组 ID
-   * @param {InlineObject4} [inlineObject4]
+   * @param {InlineObject7} [inlineObject7]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
    */
   public groupsGroupIdJoinRequestsPost_5(
     groupId: number,
-    inlineObject4?: InlineObject4,
+    inlineObject7?: InlineObject7,
     options?: any
   ) {
     return GroupsApiFp(this.configuration)
-      .groupsGroupIdJoinRequestsPost_5(groupId, inlineObject4, options)
+      .groupsGroupIdJoinRequestsPost_5(groupId, inlineObject7, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -2589,7 +2589,7 @@ export class GroupsApi extends BaseAPI {
    * @summary 处理用户组加入申请
    * @param {number} groupId 用户组 ID
    * @param {number} requestId 加入申请的 ID
-   * @param {InlineObject5} [inlineObject5]
+   * @param {InlineObject8} [inlineObject8]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
@@ -2597,14 +2597,14 @@ export class GroupsApi extends BaseAPI {
   public groupsGroupIdJoinRequestsRequestIdPut(
     groupId: number,
     requestId: number,
-    inlineObject5?: InlineObject5,
+    inlineObject8?: InlineObject8,
     options?: any
   ) {
     return GroupsApiFp(this.configuration)
       .groupsGroupIdJoinRequestsRequestIdPut(
         groupId,
         requestId,
-        inlineObject5,
+        inlineObject8,
         options
       )
       .then((request) => request(this.axios, this.basePath));
@@ -2615,7 +2615,7 @@ export class GroupsApi extends BaseAPI {
    * @summary 处理用户组加入申请
    * @param {number} groupId 用户组 ID
    * @param {number} requestId 加入申请的 ID
-   * @param {InlineObject5} [inlineObject5]
+   * @param {InlineObject8} [inlineObject8]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
@@ -2623,14 +2623,14 @@ export class GroupsApi extends BaseAPI {
   public groupsGroupIdJoinRequestsRequestIdPut_6(
     groupId: number,
     requestId: number,
-    inlineObject5?: InlineObject5,
+    inlineObject8?: InlineObject8,
     options?: any
   ) {
     return GroupsApiFp(this.configuration)
       .groupsGroupIdJoinRequestsRequestIdPut_6(
         groupId,
         requestId,
-        inlineObject5,
+        inlineObject8,
         options
       )
       .then((request) => request(this.axios, this.basePath));
@@ -2734,18 +2734,18 @@ export class GroupsApi extends BaseAPI {
    * 修改用户组的名称或描述。需要是该组管理员。
    * @summary 修改用户组信息
    * @param {number} groupId 用户组 ID
-   * @param {InlineObject3} [inlineObject3]
+   * @param {InlineObject6} [inlineObject6]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
    */
   public groupsGroupIdPut(
     groupId: number,
-    inlineObject3?: InlineObject3,
+    inlineObject6?: InlineObject6,
     options?: any
   ) {
     return GroupsApiFp(this.configuration)
-      .groupsGroupIdPut(groupId, inlineObject3, options)
+      .groupsGroupIdPut(groupId, inlineObject6, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -2753,46 +2753,46 @@ export class GroupsApi extends BaseAPI {
    * 修改用户组的名称或描述。需要是该组管理员。
    * @summary 修改用户组信息
    * @param {number} groupId 用户组 ID
-   * @param {InlineObject3} [inlineObject3]
+   * @param {InlineObject6} [inlineObject6]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
    */
   public groupsGroupIdPut_10(
     groupId: number,
-    inlineObject3?: InlineObject3,
+    inlineObject6?: InlineObject6,
     options?: any
   ) {
     return GroupsApiFp(this.configuration)
-      .groupsGroupIdPut_10(groupId, inlineObject3, options)
+      .groupsGroupIdPut_10(groupId, inlineObject6, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
    * 任何登录用户可以创建用户组，并自动成为该组管理员。
    * @summary 创建用户组
-   * @param {InlineObject2} [inlineObject2]
+   * @param {InlineObject5} [inlineObject5]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
    */
-  public groupsPost(inlineObject2?: InlineObject2, options?: any) {
+  public groupsPost(inlineObject5?: InlineObject5, options?: any) {
     return GroupsApiFp(this.configuration)
-      .groupsPost(inlineObject2, options)
+      .groupsPost(inlineObject5, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
    * 任何登录用户可以创建用户组，并自动成为该组管理员。
    * @summary 创建用户组
-   * @param {InlineObject2} [inlineObject2]
+   * @param {InlineObject5} [inlineObject5]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GroupsApi
    */
-  public groupsPost_11(inlineObject2?: InlineObject2, options?: any) {
+  public groupsPost_11(inlineObject5?: InlineObject5, options?: any) {
     return GroupsApiFp(this.configuration)
-      .groupsPost_11(inlineObject2, options)
+      .groupsPost_11(inlineObject5, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

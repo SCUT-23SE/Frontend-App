@@ -12,32 +12,44 @@
  */
 
 
-import { VerificationData } from './verification-data';
+import { TaskVerificationConfig } from './task-verification-config';
 
 /**
- * 请根据任务的校验方式配置提供相应的校验数据。服务器会根据任务配置校验必要字段。
+ * 创建签到任务时，根据verificationConfig.checkinMethods的设置决定是否需要提供额外参数： - 若checkinMethods.wifi为true，则必须提供wifiInfo - 若checkinMethods.nfc为true，则必须提供nfcInfo
  * @export
  * @interface InlineObject9
  */
 export interface InlineObject9 {
     /**
+     * 任务名称
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    taskName: string;
+    /**
+     * 任务描述
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    description?: string;
+    /**
+     * 签到开始时间（Unix时间戳，单位：秒）
+     * @type {number}
+     * @memberof InlineObject9
+     */
+    startTime: number;
+    /**
+     * 签到结束时间（Unix时间戳，单位：秒）
+     * @type {number}
+     * @memberof InlineObject9
+     */
+    endTime: number;
+    /**
      * 
-     * @type {VerificationData}
+     * @type {TaskVerificationConfig}
      * @memberof InlineObject9
      */
-    verificationData: VerificationData;
-    /**
-     * 用户提交的签到时间（Unix时间戳，单位：秒），默认为当前时间
-     * @type {number}
-     * @memberof InlineObject9
-     */
-    signinTime?: number;
-    /**
-     * 用户组ID
-     * @type {number}
-     * @memberof InlineObject9
-     */
-    groupId?: number;
+    verificationConfig: TaskVerificationConfig;
 }
 
 

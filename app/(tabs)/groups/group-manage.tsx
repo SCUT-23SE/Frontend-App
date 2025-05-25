@@ -10,12 +10,17 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   ClipboardCopy,
   Users,
-  CircleCheck as CheckCircle2,
+  CheckCircle,
   UserPlus,
   AlertTriangle,
 } from 'lucide-react-native';
 import { useGroupsStore } from '@/stores/groups';
 import { useEffect } from 'react';
+import Card from '@/components/Card';
+import Button from '@/components/Button';
+import ListItem from '@/components/ListItem';
+import ShareLinkButton from '@/app/components/ShareLinkButton';
+import THEME, { COLORS, FONTS, SIZES } from '@/utils/theme';
 
 export default function GroupManageScreen() {
   const { id } = useLocalSearchParams();
@@ -40,29 +45,29 @@ export default function GroupManageScreen() {
     {
       id: 'tasks',
       title: '签到任务管理',
-      icon: CheckCircle2,
-      color: '#4A90E2',
+      icon: CheckCircle,
+      color: '#007AFF',
       onPress: () => router.push(`/groups/admin-tasks?id=${id}`),
     },
     {
       id: 'members',
       title: '成员列表',
       icon: Users,
-      color: '#4CAF50',
+      color: '#4CD964',
       onPress: () => router.push(`/groups/admin-members?id=${id}`),
     },
     {
       id: 'applications',
       title: '入组申请',
       icon: UserPlus,
-      color: '#FF9800',
+      color: '#FF9500',
       onPress: () => router.push(`/groups/admin-applications?id=${id}`),
     },
     {
       id: 'audit-requests',
       title: '管理异常情况',
       icon: AlertTriangle,
-      color: '#E91E63',
+      color: '#FF3B30',
       onPress: () => router.push(`/groups/admin-audit-requests?id=${id}`),
     },
   ];
@@ -70,7 +75,7 @@ export default function GroupManageScreen() {
   if (currentGroupLoading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#4A90E2" />
+        <ActivityIndicator size="large" color="#007AFF" />
         <Text style={styles.loadingText}>加载中...</Text>
       </View>
     );
@@ -80,12 +85,12 @@ export default function GroupManageScreen() {
     return (
       <View style={styles.centerContainer}>
         <Text style={styles.errorText}>{currentGroupError}</Text>
-        <TouchableOpacity
-          style={styles.retryButton}
+        <Button
+          title="重试"
           onPress={() => fetchGroupDetail(id as string)}
-        >
-          <Text style={styles.retryText}>重试</Text>
-        </TouchableOpacity>
+          variant="primary"
+          size="medium"
+        />
       </View>
     );
   }
@@ -103,10 +108,20 @@ export default function GroupManageScreen() {
       <View style={styles.header}>
         <Text style={styles.groupName}>{currentGroup.name}</Text>
         <Text style={styles.description}>{currentGroup.description}</Text>
-        <TouchableOpacity style={styles.copyButton} onPress={handleCopyId}>
-          <Text style={styles.groupId}>ID: {id}</Text>
-          <ClipboardCopy size={16} color="#666" />
-        </TouchableOpacity>
+        <View style={styles.idContainer}>
+          <TouchableOpacity style={styles.copyButton} onPress={handleCopyId}>
+            <Text style={styles.groupId}>ID: {id}</Text>
+            <ClipboardCopy size={16} color="#8E8E93" />
+          </TouchableOpacity>
+
+          <ShareLinkButton
+            type="group"
+            id={id as string}
+            label="分享邀请链接"
+            mode="both"
+            style={styles.shareButton}
+          />
+        </View>
       </View>
 
       <View style={styles.menuSection}>
@@ -116,12 +131,16 @@ export default function GroupManageScreen() {
             style={styles.menuItem}
             onPress={item.onPress}
           >
-            <View style={styles.menuIcon}>
-              <item.icon size={24} color={item.color} />
+            <View
+              style={[
+                styles.iconContainer,
+                { backgroundColor: `${item.color}15` },
+              ]}
+            >
+              <item.icon size={20} color={item.color} />
             </View>
-            <View style={styles.menuContent}>
-              <Text style={styles.menuTitle}>{item.title}</Text>
-            </View>
+            <Text style={styles.menuItemText}>{item.title}</Text>
+            <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -132,100 +151,105 @@ export default function GroupManageScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F8F8FA',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#F8F8FA',
   },
   loadingText: {
     marginTop: 12,
     fontSize: 16,
-    color: '#666',
+    color: '#8E8E93',
   },
   errorText: {
     fontSize: 16,
-    color: '#ff3b30',
+    color: '#FF3B30',
     textAlign: 'center',
     marginBottom: 12,
   },
-  retryButton: {
-    backgroundColor: '#4A90E2',
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 6,
-  },
-  retryText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '500',
-  },
   header: {
-    backgroundColor: '#fff',
-    padding: 20,
+    marginHorizontal: 16,
+    marginVertical: 12,
+    backgroundColor: 'white',
+    borderRadius: 14,
+    padding: 16,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 6,
   },
   groupName: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
+    marginBottom: 4,
+    color: '#000',
   },
   description: {
-    fontSize: 15,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 16,
+    fontSize: 14,
+    color: '#8E8E93',
+    marginBottom: 10,
+  },
+  idContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 8,
   },
   copyButton: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   groupId: {
-    fontSize: 14,
-    color: '#666',
-    marginRight: 8,
+    fontSize: 13,
+    color: '#8E8E93',
+    marginRight: 4,
   },
-  descriptionSection: {
-    backgroundColor: '#fff',
-    marginTop: 12,
-    padding: 20,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
+  shareButton: {
+    marginLeft: 'auto',
   },
   menuSection: {
-    backgroundColor: '#fff',
+    marginHorizontal: 16,
     marginTop: 12,
-    borderRadius: 12,
-    marginHorizontal: 12,
-    padding: 8,
+    marginBottom: 24,
+    backgroundColor: 'white',
+    borderRadius: 14,
+    overflow: 'hidden',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 6,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    borderRadius: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#EEEEEF',
   },
-  menuIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F8FF',
+  iconContainer: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 14,
   },
-  menuContent: {
+  menuItemText: {
     flex: 1,
+    fontSize: 15,
+    color: '#000',
+    fontWeight: '400',
   },
-  menuTitle: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '500',
+  chevron: {
+    fontSize: 18,
+    color: '#C7C7CC',
+    marginLeft: 8,
   },
 });

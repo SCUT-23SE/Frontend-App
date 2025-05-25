@@ -12,7 +12,6 @@
  */
 
 
-import { VerificationData } from './verification-data';
 
 /**
  * 
@@ -21,27 +20,26 @@ import { VerificationData } from './verification-data';
  */
 export interface InlineObject8 {
     /**
-     * 指定要验证的信息类型
+     * 处理动作
      * @type {string}
      * @memberof InlineObject8
      */
-    verifyType: InlineObject8VerifyTypeEnum;
+    action: InlineObject8ActionEnum;
     /**
-     * 
-     * @type {VerificationData}
+     * 拒绝理由 (当 action 为 reject 时可选)
+     * @type {string}
      * @memberof InlineObject8
      */
-    verificationData: VerificationData;
+    rejectReason?: string;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum InlineObject8VerifyTypeEnum {
-    Gps = 'gps',
-    Wifi = 'wifi',
-    Nfc = 'nfc'
+export enum InlineObject8ActionEnum {
+    Approve = 'approve',
+    Reject = 'reject'
 }
 
 

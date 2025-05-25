@@ -20,17 +20,17 @@
  */
 export interface InlineObject13 {
     /**
-     * 用户ID
-     * @type {number}
-     * @memberof InlineObject13
-     */
-    userId: number;
-    /**
-     * 人脸图像的Base64编码
+     * 异常原因说明
      * @type {string}
      * @memberof InlineObject13
      */
-    faceImageBase64: string;
+    reason: string;
+    /**
+     * 证明图片 URL (可选)
+     * @type {string}
+     * @memberof InlineObject13
+     */
+    proofImageUrls?: string;
 }
 
 

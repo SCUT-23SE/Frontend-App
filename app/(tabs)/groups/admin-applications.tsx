@@ -8,16 +8,23 @@ import {
   RefreshControl,
   Alert,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { Check, X, User } from 'lucide-react-native';
 import { Application } from '@/types/applications';
 import { applicationsService } from '@/services/applications-service';
 import { JoinRequestStatusEnum } from '@/gen/models';
+import { faceApi } from '@/request';
+
+// 扩展Application类型，增加人脸图片字段
+interface ApplicationWithFace extends Application {
+  faceImage?: string;
+}
 
 export default function ApplicationsScreen() {
   const { id: groupId } = useLocalSearchParams();
-  const [applications, setApplications] = useState<Application[]>([]);
+  const [applications, setApplications] = useState<ApplicationWithFace[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -26,6 +33,7 @@ export default function ApplicationsScreen() {
     action: 'approve' | 'reject';
   } | null>(null);
   const [loadingDetails, setLoadingDetails] = useState<string[]>([]);
+  const [loadingFaces, setLoadingFaces] = useState<string[]>([]);
 
   const fetchApplications = async () => {
     if (!groupId) return;
@@ -41,6 +49,8 @@ export default function ApplicationsScreen() {
         response.data.forEach((app) => {
           if (app.status === JoinRequestStatusEnum.Pending) {
             fetchApplicationDetail(app.id);
+            // 获取用户人脸信息
+            fetchUserFace(app.userId, app.id);
           }
         });
       } else {
@@ -81,6 +91,38 @@ export default function ApplicationsScreen() {
       console.error('获取申请详情失败:', error);
     } finally {
       setLoadingDetails((prev) => prev.filter((id) => id !== applicationId));
+    }
+  };
+
+  // 新增：获取用户人脸图片
+  const fetchUserFace = async (userId: string, applicationId: string) => {
+    if (!userId || loadingFaces.includes(userId)) return;
+
+    setLoadingFaces((prev) => [...prev, userId]);
+
+    try {
+      const response = await faceApi.usersMeFaceGet(parseInt(userId));
+
+      if (response.data && response.data.data) {
+        const responseData = response.data.data as any;
+        if (responseData.faceImageBase64) {
+          // 更新对应申请的人脸图片
+          setApplications((prev) =>
+            prev.map((app) =>
+              app.id === applicationId
+                ? {
+                    ...app,
+                    faceImage: `data:image/jpeg;base64,${responseData.faceImageBase64}`,
+                  }
+                : app
+            )
+          );
+        }
+      }
+    } catch (error) {
+      console.error(`获取用户${userId}的人脸信息失败:`, error);
+    } finally {
+      setLoadingFaces((prev) => prev.filter((id) => id !== userId));
     }
   };
 
@@ -125,7 +167,7 @@ export default function ApplicationsScreen() {
     fetchApplications();
   }, [groupId]);
 
-  const renderApplication = ({ item }: { item: Application }) => (
+  const renderApplication = ({ item }: { item: ApplicationWithFace }) => (
     <View style={styles.applicationCard}>
       <View style={styles.header}>
         <View style={styles.userInfo}>
@@ -138,6 +180,17 @@ export default function ApplicationsScreen() {
           {new Date(item.submitTime * 1000).toLocaleString()}
         </Text>
       </View>
+
+      {item.faceImage && (
+        <View style={styles.faceImageContainer}>
+          <Text style={styles.faceLabel}>申请者人脸照片：</Text>
+          <Image
+            source={{ uri: item.faceImage }}
+            style={styles.faceImage}
+            resizeMode="cover"
+          />
+        </View>
+      )}
 
       {item.reason && (
         <View style={styles.reasonContainer}>
@@ -185,8 +238,8 @@ export default function ApplicationsScreen() {
             {
               backgroundColor:
                 item.status === JoinRequestStatusEnum.Approved
-                  ? '#4CAF50'
-                  : '#F44336',
+                  ? '#48D1CC'
+                  : '#FA8072',
             },
           ]}
         >
@@ -264,16 +317,16 @@ const styles = StyleSheet.create({
   },
   applicationCard: {
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderRadius: 16,
     padding: 16,
-    marginBottom: 12,
+    marginBottom: 16,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 3,
     },
     shadowOpacity: 0.1,
-    shadowRadius: 3.84,
+    shadowRadius: 5,
     elevation: 5,
   },
   header: {
@@ -290,43 +343,63 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#E9F1FC',
+    backgroundColor: '#F0F0F0',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
+  faceImageContainer: {
+    marginTop: 8,
+    marginBottom: 12,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E5EA',
+  },
+  faceLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1C1C1E',
+    marginBottom: 8,
+  },
+  faceImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#E5E5EA',
+  },
   userName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#333',
+    color: '#1C1C1E',
   },
   time: {
     fontSize: 12,
-    color: '#666',
+    color: '#8A8A8E',
   },
   reasonContainer: {
     marginTop: 8,
     marginBottom: 12,
     paddingTop: 8,
     borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    borderTopColor: '#E5E5EA',
   },
   reasonLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#333',
+    color: '#1C1C1E',
     marginBottom: 4,
   },
   reasonText: {
     fontSize: 14,
-    color: '#666',
+    color: '#8A8A8E',
     lineHeight: 20,
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    borderTopColor: '#E5E5EA',
     paddingTop: 12,
     marginTop: 16,
   },
@@ -335,16 +408,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minWidth: 90,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 20,
     marginLeft: 12,
   },
   approveButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#389E0D',
   },
   rejectButton: {
-    backgroundColor: '#F44336',
+    backgroundColor: '#FF4D4F',
   },
   actionButtonText: {
     color: '#fff',

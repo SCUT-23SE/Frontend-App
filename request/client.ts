@@ -11,8 +11,7 @@ import { navigateToLogin } from './navigationService';
 
 // API 基础URL配置
 // 根据Expo环境配置获取API基础URL
-const API_BASE_URL =
-  Constants.expoConfig?.extra?.apiUrl ;
+const API_BASE_URL = Constants.expoConfig?.extra?.apiUrl;
 
 // Token存储键名
 const TOKEN_KEY = 'auth_token';
@@ -79,6 +78,13 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+// 白名单URL，这些接口的错误将直接传递给调用方，不进行全局处理
+const ERROR_WHITELIST_URLS = [
+  '/auth/login',
+  '/auth/register',
+  '/auth/send-verification-code',
+];
+
 // 响应拦截器 - 处理错误统一处理
 axiosInstance.interceptors.response.use(
   (response) => {
@@ -91,11 +97,22 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // 处理 401 未授权错误
-    if (error.response?.status === 401) {
-      // JWT过期或无效，清除token
-      await clearToken();
+    // 检查请求URL是否在白名单中
+    const requestUrl = originalRequest.url || '';
+    const isWhitelisted = ERROR_WHITELIST_URLS.some(
+      (url) => requestUrl.includes(url) || requestUrl.endsWith(url)
+    );
 
+    // 如果在白名单中，直接将错误传递给调用方
+    if (isWhitelisted) {
+      return Promise.reject(error);
+    }
+
+    // 处理 401 未授权错误（仅针对非白名单接口）
+    if (error.response?.status === 401) {
+      // 静默处理，不打印日志
+      // 清除token
+      await clearToken();
       // 使用导航服务重定向到登录页面
       navigateToLogin();
     }

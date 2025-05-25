@@ -1,7 +1,8 @@
-import { checkinTasksApi, checkinRecordsApi } from '@/request';
+import { checkinTasksApi, checkinRecordsApi, faceApi } from '@/request';
+import { useAuth } from '@/stores/auth';
 import type { TaskType, AdminTaskType } from '@/types/tasks';
 import {
-  InlineObject8VerifyTypeEnum,
+  InlineObject11VerifyTypeEnum,
   type VerificationDataLocationInfo,
   type WifiInfo,
   type TaskVerificationConfig,
@@ -20,7 +21,7 @@ export type CheckInDetail = CheckinRecord; // 使用 CheckinRecord 作为详情�
 
 // 定义 verifyCheckInType 返回的类型
 export interface VerificationResult {
-  type: 'gps' | 'face' | 'wifi';
+  type: 'gps' | 'face' | 'wifi' | 'nfc';
   verified: boolean;
   reason?: string;
   message?: string;
@@ -134,11 +135,11 @@ export const verifyCheckIn = async (
   checkInTime?: string;
   failureReason?: string;
 }> => {
-  let verifyType: InlineObject8VerifyTypeEnum;
+  let verifyType: InlineObject11VerifyTypeEnum;
   if (data.location) {
-    verifyType = InlineObject8VerifyTypeEnum.Gps;
+    verifyType = InlineObject11VerifyTypeEnum.Gps;
   } else if (data.wifiInfo) {
-    verifyType = InlineObject8VerifyTypeEnum.Wifi;
+    verifyType = InlineObject11VerifyTypeEnum.Wifi;
   } else {
     throw new Error('No valid verification data provided for check-in.');
   }
@@ -519,84 +520,260 @@ export const checkInService = {
   // 单独验证某一种签到类型
   verifyCheckInType: async (
     taskId: string,
-    verifyType: 'gps' | 'face' | 'wifi',
+    verifyType: 'gps' | 'face' | 'wifi' | 'nfc',
     data: {
       location?: { latitude: number; longitude: number };
-      faceData?: string;
+      faceDataArray?: string[];
       wifiInfo?: { ssid: string; bssid: string };
+      nfcId?: string;
     }
   ): Promise<VerificationResult> => {
     try {
-      let apiVerifyType: string;
-      switch (verifyType) {
-        case 'gps':
-          apiVerifyType = InlineObject8VerifyTypeEnum.Gps;
-          break;
-        case 'face':
-          // 注意: API文档中并未列出face验证类型，这里可能需要进一步确认
-          apiVerifyType = 'face';
-          break;
-        case 'wifi':
-          apiVerifyType = InlineObject8VerifyTypeEnum.Wifi;
-          break;
-        default:
-          throw new Error(`不支持的验证类型: ${verifyType}`);
-      }
+      if (verifyType === 'face') {
+        if (!data.faceDataArray || data.faceDataArray.length === 0) {
+          return {
+            type: 'face',
+            verified: false,
+            reason: '未提供人脸数据或数据为空',
+            message: '未提供人脸数据或数据为空',
+          };
+        }
 
-      const verificationData = {
-        locationInfo: data.location
-          ? {
-              location: {
-                latitude: data.location.latitude,
-                longitude: data.location.longitude,
-              },
-            }
-          : undefined,
-        faceData: data.faceData,
-        wifiInfo: data.wifiInfo,
-      };
+        // 严格验证必须是5张图片
+        if (data.faceDataArray.length !== 5) {
+          return {
+            type: 'face',
+            verified: false,
+            reason: `人脸数据数量不正确，期望5张，实际${data.faceDataArray.length}张`,
+            message: `人脸数据数量不正确，期望5张，实际${data.faceDataArray.length}张`,
+          };
+        }
 
-      const response = await checkinTasksApi.checkinTasksTaskIdVerifyPost(
-        Number(taskId),
-        { verifyType: apiVerifyType as any, verificationData }
-      );
+        const currentUser = useAuth.getState().user;
+        if (!currentUser || !currentUser.id) {
+          return {
+            type: 'face',
+            verified: false,
+            reason: '无法获取用户信息，请重新登录',
+            message: '无法获取用户信息，请重新登录',
+          };
+        }
+        const userId = parseInt(currentUser.id, 10);
 
-      if (
-        response.data &&
-        response.data.code === BaseResponseCodeEnum._0 &&
-        response.data.data
-      ) {
-        // API返回格式为 {message: "位置验证成功", valid: true, verifyType: "gps"}
-        const verifyResult = response.data.data as {
-          message?: string;
-          valid?: boolean;
-          verifyType?: string;
-        };
+        if (isNaN(userId)) {
+          return {
+            type: 'face',
+            verified: false,
+            reason: '无效的用户ID格式',
+            message: '无效的用户ID格式',
+          };
+        }
 
-        return {
-          type: verifyType,
-          verified: verifyResult.valid === true, // 使用valid字段判断验证是否成功
-          reason: verifyResult.message, // 使用message作为reason
-          message: verifyResult.message, // 同时保留message字段
-        };
+        try {
+          // 增加请求超时和错误处理
+          console.log(`[请求开始]array:${data.faceDataArray.length}`);
+
+          // 计算每个图片的大小并输出
+          const imageSizes = data.faceDataArray.map((base64) => {
+            // 去除base64前缀部分，只计算实际数据大小
+            const base64Data = base64.split(',')[1] || base64;
+            // 计算base64字符串的字节大小并转换为KB
+            const sizeInBytes = (base64Data.length * 3) / 4;
+            return Math.round(sizeInBytes / 1024); // 转换为KB并四舍五入
+          });
+
+          // 计算总大小
+          const totalSizeKB = imageSizes.reduce((sum, size) => sum + size, 0);
+          console.log(`[人脸图片总大小] ${totalSizeKB} KB`);
+
+          // 使用Promise.race来设置超时
+          const timeoutPromise = new Promise<any>((_, reject) => {
+            setTimeout(() => reject(new Error('人脸验证请求超时')), 15000); // 15秒超时
+          });
+
+          // 实际API请求
+          const apiPromise = faceApi.usersMeFaceVerifyPost({
+            userId: userId,
+            faceImagesBase64: data.faceDataArray,
+          });
+
+          // 使用Promise.race竞争，谁先完成就用谁的结果
+          const response = await Promise.race([apiPromise, timeoutPromise]);
+
+          console.log(
+            'Face verification API response data:',
+            response.data.data
+          );
+
+          if (
+            response.data &&
+            response.data.code === BaseResponseCodeEnum._0 &&
+            response.data.data &&
+            typeof (response.data.data as any).isMatch === 'boolean'
+          ) {
+            const isMatch = (response.data.data as any).isMatch;
+            const responseMessage = (response.data as any).message || '';
+            return {
+              type: 'face',
+              verified: isMatch,
+              message: isMatch
+                ? '人脸验证成功'
+                : responseMessage || '人脸验证失败，请重试',
+              reason: isMatch ? '人脸匹配' : responseMessage || '人脸不匹配',
+            };
+          } else {
+            const errorMsg =
+              (response.data as any).message || '人脸验证接口未能成功处理请求';
+            console.error(`人脸验证失败 (API: ${errorMsg}):`, response.data);
+            return {
+              type: 'face',
+              verified: false,
+              reason: errorMsg,
+              message: errorMsg,
+            };
+          }
+        } catch (faceError: any) {
+          console.error(
+            '人脸验证异常 (调用 faceApi):',
+            faceError.response?.data || faceError.message,
+            '[数据长度]',
+            data.faceDataArray?.length
+          );
+          console.error(faceError);
+
+          // 检查是否为网络错误，优化错误处理
+          let errorMessage = '人脸验证请求失败，请检查网络或联系管理员';
+
+          if (faceError.message && faceError.message.includes('超时')) {
+            errorMessage = '人脸验证请求超时，请重试';
+          } else if (
+            faceError.message &&
+            faceError.message.includes('Network Error')
+          ) {
+            errorMessage = '网络连接错误，请检查网络后重试';
+          } else if (faceError.response?.status === 413) {
+            errorMessage = '图像数据过大，请确保光线良好并靠近摄像头';
+          } else if (faceError.response?.data?.message) {
+            errorMessage = faceError.response.data.message;
+          } else if (faceError.message) {
+            errorMessage = faceError.message;
+          }
+
+          return {
+            type: 'face',
+            verified: false,
+            reason: errorMessage,
+            message: errorMessage,
+          };
+        }
       } else {
-        const errorMsg = response.data
-          ? `${verifyType}验证失败`
-          : `${verifyType}验证失败`;
-        console.error(`${verifyType}验证失败:`, response.data);
-        return {
-          type: verifyType,
-          verified: false,
-          reason: errorMsg,
-          message: errorMsg,
-        };
+        let apiVerifyType: InlineObject11VerifyTypeEnum;
+        const verificationDataForTask: Partial<VerificationData> = {};
+
+        switch (verifyType) {
+          case 'gps':
+            apiVerifyType = InlineObject11VerifyTypeEnum.Gps;
+            if (data.location) {
+              verificationDataForTask.locationInfo = {
+                location: {
+                  latitude: data.location.latitude,
+                  longitude: data.location.longitude,
+                },
+              };
+            } else {
+              return {
+                type: 'gps',
+                verified: false,
+                reason: '未提供GPS数据',
+                message: '未提供GPS数据',
+              };
+            }
+            break;
+          case 'wifi':
+            apiVerifyType = InlineObject11VerifyTypeEnum.Wifi;
+            if (data.wifiInfo) {
+              verificationDataForTask.wifiInfo = data.wifiInfo as WifiInfo;
+            } else {
+              return {
+                type: 'wifi',
+                verified: false,
+                reason: '未提供WiFi数据',
+                message: '未提供WiFi数据',
+              };
+            }
+            break;
+          case 'nfc':
+            apiVerifyType = InlineObject11VerifyTypeEnum.Nfc;
+            if (data.nfcId) {
+              verificationDataForTask.nfcInfo = { tagId: data.nfcId };
+            } else {
+              return {
+                type: 'nfc',
+                verified: false,
+                reason: '未提供NFC数据',
+                message: '未提供NFC数据',
+              };
+            }
+            break;
+          default:
+            const exhaustiveCheck: never = verifyType;
+            console.error(`未知的验证类型: ${exhaustiveCheck}`);
+            return {
+              type: verifyType as any,
+              verified: false,
+              reason: `不支持的验证类型: ${verifyType}`,
+              message: `不支持的验证类型: ${verifyType}`,
+            };
+        }
+
+        const response = await checkinTasksApi.checkinTasksTaskIdVerifyPost(
+          Number(taskId),
+          {
+            verifyType: apiVerifyType,
+            verificationData: verificationDataForTask as VerificationData,
+          }
+        );
+
+        if (
+          response.data &&
+          response.data.code === BaseResponseCodeEnum._0 &&
+          response.data.data
+        ) {
+          const verifyResult = response.data.data as {
+            message?: string;
+            valid?: boolean;
+            verifyType?: string;
+          };
+          return {
+            type: verifyType,
+            verified: verifyResult.valid === true,
+            reason: verifyResult.message,
+            message: verifyResult.message,
+          };
+        } else {
+          const errorMsg =
+            (response.data as any).message || `${verifyType}验证接口处理失败`;
+          console.error(
+            `${verifyType}验证失败 (API: ${errorMsg}):`,
+            response.data
+          );
+          return {
+            type: verifyType,
+            verified: false,
+            reason: errorMsg,
+            message: errorMsg,
+          };
+        }
       }
-    } catch (error) {
-      console.error(`${verifyType}验证异常:`, error);
+    } catch (error: any) {
+      console.error(
+        `${verifyType}验证顶层异常:`,
+        error.response?.data || error.message
+      );
       const errorMessage =
-        error instanceof Error
-          ? error.message
-          : `${verifyType}验证请求失败，请检查网络连接`;
+        (error.response?.data as any)?.message ||
+        error.message ||
+        `${verifyType}验证请求发生未知错误`;
       return {
         type: verifyType,
         verified: false,

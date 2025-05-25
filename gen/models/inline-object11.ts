@@ -12,6 +12,7 @@
  */
 
 
+import { VerificationData } from './verification-data';
 
 /**
  * 
@@ -20,20 +21,27 @@
  */
 export interface InlineObject11 {
     /**
-     * 处理动作
+     * 指定要验证的信息类型
      * @type {string}
      * @memberof InlineObject11
      */
-    action: InlineObject11ActionEnum;
+    verifyType: InlineObject11VerifyTypeEnum;
+    /**
+     * 
+     * @type {VerificationData}
+     * @memberof InlineObject11
+     */
+    verificationData: VerificationData;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum InlineObject11ActionEnum {
-    Approve = 'approve',
-    Reject = 'reject'
+export enum InlineObject11VerifyTypeEnum {
+    Gps = 'gps',
+    Wifi = 'wifi',
+    Nfc = 'nfc'
 }
 
 

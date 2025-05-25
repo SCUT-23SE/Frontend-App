@@ -26,9 +26,11 @@ import {
 // @ts-ignore
 import { BadRequest } from '../models';
 // @ts-ignore
+import { Conflict } from '../models';
+// @ts-ignore
 import { Forbidden } from '../models';
 // @ts-ignore
-import { InlineObject9 } from '../models';
+import { InlineObject12 } from '../models';
 // @ts-ignore
 import { InternalServerError } from '../models';
 // @ts-ignore
@@ -49,13 +51,13 @@ export const CheckinRecordsApiAxiosParamCreator = function (
      * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
      * @summary 执行签到
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject9} [inlineObject9]
+     * @param {InlineObject12} [inlineObject12]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdCheckinPost: async (
       taskId: number,
-      inlineObject9?: InlineObject9,
+      inlineObject12?: InlineObject12,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -99,11 +101,11 @@ export const CheckinRecordsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject9 !== 'string' ||
+        typeof inlineObject12 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject9 !== undefined ? inlineObject9 : {})
-        : inlineObject9 || '';
+        ? JSON.stringify(inlineObject12 !== undefined ? inlineObject12 : {})
+        : inlineObject12 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -114,13 +116,13 @@ export const CheckinRecordsApiAxiosParamCreator = function (
      * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
      * @summary 执行签到
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject9} [inlineObject9]
+     * @param {InlineObject12} [inlineObject12]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdCheckinPost_1: async (
       taskId: number,
-      inlineObject9?: InlineObject9,
+      inlineObject12?: InlineObject12,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -164,11 +166,11 @@ export const CheckinRecordsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject9 !== 'string' ||
+        typeof inlineObject12 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject9 !== undefined ? inlineObject9 : {})
-        : inlineObject9 || '';
+        ? JSON.stringify(inlineObject12 !== undefined ? inlineObject12 : {})
+        : inlineObject12 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -286,7 +288,7 @@ export const CheckinRecordsApiAxiosParamCreator = function (
       };
     },
     /**
-     * 获取当前用户的所有签到记录
+     * 获取当前用户的所有签到记录，只返回签到成功的记录
      * @summary 获取当前用户签到记录
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -329,7 +331,7 @@ export const CheckinRecordsApiAxiosParamCreator = function (
       };
     },
     /**
-     * 获取当前用户的所有签到记录
+     * 获取当前用户的所有签到记录，只返回签到成功的记录
      * @summary 获取当前用户签到记录
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -384,13 +386,13 @@ export const CheckinRecordsApiFp = function (configuration?: Configuration) {
      * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
      * @summary 执行签到
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject9} [inlineObject9]
+     * @param {InlineObject12} [inlineObject12]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdCheckinPost(
       taskId: number,
-      inlineObject9?: InlineObject9,
+      inlineObject12?: InlineObject12,
       options?: any
     ): Promise<
       (
@@ -400,7 +402,7 @@ export const CheckinRecordsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinRecordsApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdCheckinPost(taskId, inlineObject9, options);
+      ).checkinTasksTaskIdCheckinPost(taskId, inlineObject12, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -416,13 +418,13 @@ export const CheckinRecordsApiFp = function (configuration?: Configuration) {
      * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
      * @summary 执行签到
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject9} [inlineObject9]
+     * @param {InlineObject12} [inlineObject12]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdCheckinPost_1(
       taskId: number,
-      inlineObject9?: InlineObject9,
+      inlineObject12?: InlineObject12,
       options?: any
     ): Promise<
       (
@@ -432,7 +434,7 @@ export const CheckinRecordsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinRecordsApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdCheckinPost_1(taskId, inlineObject9, options);
+      ).checkinTasksTaskIdCheckinPost_1(taskId, inlineObject12, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -505,7 +507,7 @@ export const CheckinRecordsApiFp = function (configuration?: Configuration) {
       };
     },
     /**
-     * 获取当前用户的所有签到记录
+     * 获取当前用户的所有签到记录，只返回签到成功的记录
      * @summary 获取当前用户签到记录
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -533,7 +535,7 @@ export const CheckinRecordsApiFp = function (configuration?: Configuration) {
       };
     },
     /**
-     * 获取当前用户的所有签到记录
+     * 获取当前用户的所有签到记录，只返回签到成功的记录
      * @summary 获取当前用户签到记录
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -577,34 +579,34 @@ export const CheckinRecordsApiFactory = function (
      * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
      * @summary 执行签到
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject9} [inlineObject9]
+     * @param {InlineObject12} [inlineObject12]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdCheckinPost(
       taskId: number,
-      inlineObject9?: InlineObject9,
+      inlineObject12?: InlineObject12,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinRecordsApiFp(configuration)
-        .checkinTasksTaskIdCheckinPost(taskId, inlineObject9, options)
+        .checkinTasksTaskIdCheckinPost(taskId, inlineObject12, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
      * @summary 执行签到
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject9} [inlineObject9]
+     * @param {InlineObject12} [inlineObject12]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdCheckinPost_1(
       taskId: number,
-      inlineObject9?: InlineObject9,
+      inlineObject12?: InlineObject12,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinRecordsApiFp(configuration)
-        .checkinTasksTaskIdCheckinPost_1(taskId, inlineObject9, options)
+        .checkinTasksTaskIdCheckinPost_1(taskId, inlineObject12, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -638,7 +640,7 @@ export const CheckinRecordsApiFactory = function (
         .then((request) => request(axios, basePath));
     },
     /**
-     * 获取当前用户的所有签到记录
+     * 获取当前用户的所有签到记录，只返回签到成功的记录
      * @summary 获取当前用户签到记录
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -651,7 +653,7 @@ export const CheckinRecordsApiFactory = function (
         .then((request) => request(axios, basePath));
     },
     /**
-     * 获取当前用户的所有签到记录
+     * 获取当前用户的所有签到记录，只返回签到成功的记录
      * @summary 获取当前用户签到记录
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -677,18 +679,18 @@ export class CheckinRecordsApi extends BaseAPI {
    * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
    * @summary 执行签到
    * @param {number} taskId 签到任务 ID
-   * @param {InlineObject9} [inlineObject9]
+   * @param {InlineObject12} [inlineObject12]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinRecordsApi
    */
   public checkinTasksTaskIdCheckinPost(
     taskId: number,
-    inlineObject9?: InlineObject9,
+    inlineObject12?: InlineObject12,
     options?: any
   ) {
     return CheckinRecordsApiFp(this.configuration)
-      .checkinTasksTaskIdCheckinPost(taskId, inlineObject9, options)
+      .checkinTasksTaskIdCheckinPost(taskId, inlineObject12, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -696,18 +698,18 @@ export class CheckinRecordsApi extends BaseAPI {
    * 用户针对某个签到任务执行签到操作。根据任务配置的校验方式提供相应数据。需要登录且是任务所属组成员。
    * @summary 执行签到
    * @param {number} taskId 签到任务 ID
-   * @param {InlineObject9} [inlineObject9]
+   * @param {InlineObject12} [inlineObject12]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinRecordsApi
    */
   public checkinTasksTaskIdCheckinPost_1(
     taskId: number,
-    inlineObject9?: InlineObject9,
+    inlineObject12?: InlineObject12,
     options?: any
   ) {
     return CheckinRecordsApiFp(this.configuration)
-      .checkinTasksTaskIdCheckinPost_1(taskId, inlineObject9, options)
+      .checkinTasksTaskIdCheckinPost_1(taskId, inlineObject12, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -740,7 +742,7 @@ export class CheckinRecordsApi extends BaseAPI {
   }
 
   /**
-   * 获取当前用户的所有签到记录
+   * 获取当前用户的所有签到记录，只返回签到成功的记录
    * @summary 获取当前用户签到记录
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -753,7 +755,7 @@ export class CheckinRecordsApi extends BaseAPI {
   }
 
   /**
-   * 获取当前用户的所有签到记录
+   * 获取当前用户的所有签到记录，只返回签到成功的记录
    * @summary 获取当前用户签到记录
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}

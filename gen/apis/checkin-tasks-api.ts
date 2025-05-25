@@ -30,11 +30,11 @@ import { Conflict } from '../models';
 // @ts-ignore
 import { Forbidden } from '../models';
 // @ts-ignore
-import { InlineObject6 } from '../models';
+import { InlineObject10 } from '../models';
 // @ts-ignore
-import { InlineObject7 } from '../models';
+import { InlineObject11 } from '../models';
 // @ts-ignore
-import { InlineObject8 } from '../models';
+import { InlineObject9 } from '../models';
 // @ts-ignore
 import { InternalServerError } from '../models';
 // @ts-ignore
@@ -277,13 +277,13 @@ export const CheckinTasksApiAxiosParamCreator = function (
      * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
      * @summary 更新签到任务
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject7} [inlineObject7]
+     * @param {InlineObject10} [inlineObject10]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdPut: async (
       taskId: number,
-      inlineObject7?: InlineObject7,
+      inlineObject10?: InlineObject10,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -327,11 +327,11 @@ export const CheckinTasksApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject7 !== 'string' ||
+        typeof inlineObject10 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject7 !== undefined ? inlineObject7 : {})
-        : inlineObject7 || '';
+        ? JSON.stringify(inlineObject10 !== undefined ? inlineObject10 : {})
+        : inlineObject10 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -342,13 +342,13 @@ export const CheckinTasksApiAxiosParamCreator = function (
      * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
      * @summary 更新签到任务
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject7} [inlineObject7]
+     * @param {InlineObject10} [inlineObject10]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdPut_3: async (
       taskId: number,
-      inlineObject7?: InlineObject7,
+      inlineObject10?: InlineObject10,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -392,11 +392,11 @@ export const CheckinTasksApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject7 !== 'string' ||
+        typeof inlineObject10 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject7 !== undefined ? inlineObject7 : {})
-        : inlineObject7 || '';
+        ? JSON.stringify(inlineObject10 !== undefined ? inlineObject10 : {})
+        : inlineObject10 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -407,13 +407,13 @@ export const CheckinTasksApiAxiosParamCreator = function (
      * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
      * @summary 验证签到信息
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject8} [inlineObject8]
+     * @param {InlineObject11} [inlineObject11]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdVerifyPost: async (
       taskId: number,
-      inlineObject8?: InlineObject8,
+      inlineObject11?: InlineObject11,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -457,11 +457,11 @@ export const CheckinTasksApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject8 !== 'string' ||
+        typeof inlineObject11 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject8 !== undefined ? inlineObject8 : {})
-        : inlineObject8 || '';
+        ? JSON.stringify(inlineObject11 !== undefined ? inlineObject11 : {})
+        : inlineObject11 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -472,13 +472,13 @@ export const CheckinTasksApiAxiosParamCreator = function (
      * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
      * @summary 验证签到信息
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject8} [inlineObject8]
+     * @param {InlineObject11} [inlineObject11]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdVerifyPost_4: async (
       taskId: number,
-      inlineObject8?: InlineObject8,
+      inlineObject11?: InlineObject11,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -522,11 +522,11 @@ export const CheckinTasksApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject8 !== 'string' ||
+        typeof inlineObject11 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject8 !== undefined ? inlineObject8 : {})
-        : inlineObject8 || '';
+        ? JSON.stringify(inlineObject11 !== undefined ? inlineObject11 : {})
+        : inlineObject11 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -647,13 +647,13 @@ export const CheckinTasksApiAxiosParamCreator = function (
      * 用户组管理员在指定用户组内创建签到任务。
      * @summary 创建签到任务
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject6} [inlineObject6]
+     * @param {InlineObject9} [inlineObject9]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdCheckinTasksPost: async (
       groupId: number,
-      inlineObject6?: InlineObject6,
+      inlineObject9?: InlineObject9,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -697,11 +697,11 @@ export const CheckinTasksApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject6 !== 'string' ||
+        typeof inlineObject9 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject6 !== undefined ? inlineObject6 : {})
-        : inlineObject6 || '';
+        ? JSON.stringify(inlineObject9 !== undefined ? inlineObject9 : {})
+        : inlineObject9 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -712,13 +712,13 @@ export const CheckinTasksApiAxiosParamCreator = function (
      * 用户组管理员在指定用户组内创建签到任务。
      * @summary 创建签到任务
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject6} [inlineObject6]
+     * @param {InlineObject9} [inlineObject9]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdCheckinTasksPost_6: async (
       groupId: number,
-      inlineObject6?: InlineObject6,
+      inlineObject9?: InlineObject9,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'groupId' is not null or undefined
@@ -762,11 +762,11 @@ export const CheckinTasksApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject6 !== 'string' ||
+        typeof inlineObject9 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject6 !== undefined ? inlineObject6 : {})
-        : inlineObject6 || '';
+        ? JSON.stringify(inlineObject9 !== undefined ? inlineObject9 : {})
+        : inlineObject9 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -984,13 +984,13 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
      * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
      * @summary 更新签到任务
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject7} [inlineObject7]
+     * @param {InlineObject10} [inlineObject10]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdPut(
       taskId: number,
-      inlineObject7?: InlineObject7,
+      inlineObject10?: InlineObject10,
       options?: any
     ): Promise<
       (
@@ -1000,7 +1000,7 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinTasksApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdPut(taskId, inlineObject7, options);
+      ).checkinTasksTaskIdPut(taskId, inlineObject10, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1016,13 +1016,13 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
      * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
      * @summary 更新签到任务
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject7} [inlineObject7]
+     * @param {InlineObject10} [inlineObject10]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdPut_3(
       taskId: number,
-      inlineObject7?: InlineObject7,
+      inlineObject10?: InlineObject10,
       options?: any
     ): Promise<
       (
@@ -1032,7 +1032,7 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinTasksApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdPut_3(taskId, inlineObject7, options);
+      ).checkinTasksTaskIdPut_3(taskId, inlineObject10, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1048,13 +1048,13 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
      * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
      * @summary 验证签到信息
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject8} [inlineObject8]
+     * @param {InlineObject11} [inlineObject11]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdVerifyPost(
       taskId: number,
-      inlineObject8?: InlineObject8,
+      inlineObject11?: InlineObject11,
       options?: any
     ): Promise<
       (
@@ -1064,7 +1064,7 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinTasksApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdVerifyPost(taskId, inlineObject8, options);
+      ).checkinTasksTaskIdVerifyPost(taskId, inlineObject11, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1080,13 +1080,13 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
      * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
      * @summary 验证签到信息
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject8} [inlineObject8]
+     * @param {InlineObject11} [inlineObject11]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdVerifyPost_4(
       taskId: number,
-      inlineObject8?: InlineObject8,
+      inlineObject11?: InlineObject11,
       options?: any
     ): Promise<
       (
@@ -1096,7 +1096,7 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinTasksApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdVerifyPost_4(taskId, inlineObject8, options);
+      ).checkinTasksTaskIdVerifyPost_4(taskId, inlineObject11, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1172,13 +1172,13 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
      * 用户组管理员在指定用户组内创建签到任务。
      * @summary 创建签到任务
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject6} [inlineObject6]
+     * @param {InlineObject9} [inlineObject9]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdCheckinTasksPost(
       groupId: number,
-      inlineObject6?: InlineObject6,
+      inlineObject9?: InlineObject9,
       options?: any
     ): Promise<
       (
@@ -1188,7 +1188,7 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinTasksApiAxiosParamCreator(
         configuration
-      ).groupsGroupIdCheckinTasksPost(groupId, inlineObject6, options);
+      ).groupsGroupIdCheckinTasksPost(groupId, inlineObject9, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1204,13 +1204,13 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
      * 用户组管理员在指定用户组内创建签到任务。
      * @summary 创建签到任务
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject6} [inlineObject6]
+     * @param {InlineObject9} [inlineObject9]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async groupsGroupIdCheckinTasksPost_6(
       groupId: number,
-      inlineObject6?: InlineObject6,
+      inlineObject9?: InlineObject9,
       options?: any
     ): Promise<
       (
@@ -1220,7 +1220,7 @@ export const CheckinTasksApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await CheckinTasksApiAxiosParamCreator(
         configuration
-      ).groupsGroupIdCheckinTasksPost_6(groupId, inlineObject6, options);
+      ).groupsGroupIdCheckinTasksPost_6(groupId, inlineObject9, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -1365,68 +1365,68 @@ export const CheckinTasksApiFactory = function (
      * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
      * @summary 更新签到任务
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject7} [inlineObject7]
+     * @param {InlineObject10} [inlineObject10]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdPut(
       taskId: number,
-      inlineObject7?: InlineObject7,
+      inlineObject10?: InlineObject10,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinTasksApiFp(configuration)
-        .checkinTasksTaskIdPut(taskId, inlineObject7, options)
+        .checkinTasksTaskIdPut(taskId, inlineObject10, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
      * @summary 更新签到任务
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject7} [inlineObject7]
+     * @param {InlineObject10} [inlineObject10]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdPut_3(
       taskId: number,
-      inlineObject7?: InlineObject7,
+      inlineObject10?: InlineObject10,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinTasksApiFp(configuration)
-        .checkinTasksTaskIdPut_3(taskId, inlineObject7, options)
+        .checkinTasksTaskIdPut_3(taskId, inlineObject10, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
      * @summary 验证签到信息
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject8} [inlineObject8]
+     * @param {InlineObject11} [inlineObject11]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdVerifyPost(
       taskId: number,
-      inlineObject8?: InlineObject8,
+      inlineObject11?: InlineObject11,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinTasksApiFp(configuration)
-        .checkinTasksTaskIdVerifyPost(taskId, inlineObject8, options)
+        .checkinTasksTaskIdVerifyPost(taskId, inlineObject11, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
      * @summary 验证签到信息
      * @param {number} taskId 签到任务 ID
-     * @param {InlineObject8} [inlineObject8]
+     * @param {InlineObject11} [inlineObject11]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdVerifyPost_4(
       taskId: number,
-      inlineObject8?: InlineObject8,
+      inlineObject11?: InlineObject11,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinTasksApiFp(configuration)
-        .checkinTasksTaskIdVerifyPost_4(taskId, inlineObject8, options)
+        .checkinTasksTaskIdVerifyPost_4(taskId, inlineObject11, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -1463,34 +1463,34 @@ export const CheckinTasksApiFactory = function (
      * 用户组管理员在指定用户组内创建签到任务。
      * @summary 创建签到任务
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject6} [inlineObject6]
+     * @param {InlineObject9} [inlineObject9]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdCheckinTasksPost(
       groupId: number,
-      inlineObject6?: InlineObject6,
+      inlineObject9?: InlineObject9,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinTasksApiFp(configuration)
-        .groupsGroupIdCheckinTasksPost(groupId, inlineObject6, options)
+        .groupsGroupIdCheckinTasksPost(groupId, inlineObject9, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 用户组管理员在指定用户组内创建签到任务。
      * @summary 创建签到任务
      * @param {number} groupId 用户组 ID
-     * @param {InlineObject6} [inlineObject6]
+     * @param {InlineObject9} [inlineObject9]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     groupsGroupIdCheckinTasksPost_6(
       groupId: number,
-      inlineObject6?: InlineObject6,
+      inlineObject9?: InlineObject9,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return CheckinTasksApiFp(configuration)
-        .groupsGroupIdCheckinTasksPost_6(groupId, inlineObject6, options)
+        .groupsGroupIdCheckinTasksPost_6(groupId, inlineObject9, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -1589,18 +1589,18 @@ export class CheckinTasksApi extends BaseAPI {
    * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
    * @summary 更新签到任务
    * @param {number} taskId 签到任务 ID
-   * @param {InlineObject7} [inlineObject7]
+   * @param {InlineObject10} [inlineObject10]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinTasksApi
    */
   public checkinTasksTaskIdPut(
     taskId: number,
-    inlineObject7?: InlineObject7,
+    inlineObject10?: InlineObject10,
     options?: any
   ) {
     return CheckinTasksApiFp(this.configuration)
-      .checkinTasksTaskIdPut(taskId, inlineObject7, options)
+      .checkinTasksTaskIdPut(taskId, inlineObject10, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1608,18 +1608,18 @@ export class CheckinTasksApi extends BaseAPI {
    * 更新指定签到任务的信息。需要是任务所属组的管理员。注意：如果当前时间已经到达或超过了签到开始时间，将无法修改任务。
    * @summary 更新签到任务
    * @param {number} taskId 签到任务 ID
-   * @param {InlineObject7} [inlineObject7]
+   * @param {InlineObject10} [inlineObject10]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinTasksApi
    */
   public checkinTasksTaskIdPut_3(
     taskId: number,
-    inlineObject7?: InlineObject7,
+    inlineObject10?: InlineObject10,
     options?: any
   ) {
     return CheckinTasksApiFp(this.configuration)
-      .checkinTasksTaskIdPut_3(taskId, inlineObject7, options)
+      .checkinTasksTaskIdPut_3(taskId, inlineObject10, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1627,18 +1627,18 @@ export class CheckinTasksApi extends BaseAPI {
    * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
    * @summary 验证签到信息
    * @param {number} taskId 签到任务 ID
-   * @param {InlineObject8} [inlineObject8]
+   * @param {InlineObject11} [inlineObject11]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinTasksApi
    */
   public checkinTasksTaskIdVerifyPost(
     taskId: number,
-    inlineObject8?: InlineObject8,
+    inlineObject11?: InlineObject11,
     options?: any
   ) {
     return CheckinTasksApiFp(this.configuration)
-      .checkinTasksTaskIdVerifyPost(taskId, inlineObject8, options)
+      .checkinTasksTaskIdVerifyPost(taskId, inlineObject11, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1646,18 +1646,18 @@ export class CheckinTasksApi extends BaseAPI {
    * 验证用户提供的签到信息是否符合签到任务要求，但不会创建实际的签到记录。用于在完成真正签到前预先验证用户的位置、WiFi或NFC等信息。
    * @summary 验证签到信息
    * @param {number} taskId 签到任务 ID
-   * @param {InlineObject8} [inlineObject8]
+   * @param {InlineObject11} [inlineObject11]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinTasksApi
    */
   public checkinTasksTaskIdVerifyPost_4(
     taskId: number,
-    inlineObject8?: InlineObject8,
+    inlineObject11?: InlineObject11,
     options?: any
   ) {
     return CheckinTasksApiFp(this.configuration)
-      .checkinTasksTaskIdVerifyPost_4(taskId, inlineObject8, options)
+      .checkinTasksTaskIdVerifyPost_4(taskId, inlineObject11, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1693,18 +1693,18 @@ export class CheckinTasksApi extends BaseAPI {
    * 用户组管理员在指定用户组内创建签到任务。
    * @summary 创建签到任务
    * @param {number} groupId 用户组 ID
-   * @param {InlineObject6} [inlineObject6]
+   * @param {InlineObject9} [inlineObject9]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinTasksApi
    */
   public groupsGroupIdCheckinTasksPost(
     groupId: number,
-    inlineObject6?: InlineObject6,
+    inlineObject9?: InlineObject9,
     options?: any
   ) {
     return CheckinTasksApiFp(this.configuration)
-      .groupsGroupIdCheckinTasksPost(groupId, inlineObject6, options)
+      .groupsGroupIdCheckinTasksPost(groupId, inlineObject9, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1712,18 +1712,18 @@ export class CheckinTasksApi extends BaseAPI {
    * 用户组管理员在指定用户组内创建签到任务。
    * @summary 创建签到任务
    * @param {number} groupId 用户组 ID
-   * @param {InlineObject6} [inlineObject6]
+   * @param {InlineObject9} [inlineObject9]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CheckinTasksApi
    */
   public groupsGroupIdCheckinTasksPost_6(
     groupId: number,
-    inlineObject6?: InlineObject6,
+    inlineObject9?: InlineObject9,
     options?: any
   ) {
     return CheckinTasksApiFp(this.configuration)
-      .groupsGroupIdCheckinTasksPost_6(groupId, inlineObject6, options)
+      .groupsGroupIdCheckinTasksPost_6(groupId, inlineObject9, options)
       .then((request) => request(this.axios, this.basePath));
   }
 

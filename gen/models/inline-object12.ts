@@ -12,51 +12,32 @@
  */
 
 
-import { ExportTasksDateRange } from './export-tasks-date-range';
+import { VerificationData } from './verification-data';
 
 /**
- * 
+ * 请根据任务的校验方式配置提供相应的校验数据。服务器会根据任务配置校验必要字段。
  * @export
  * @interface InlineObject12
  */
 export interface InlineObject12 {
     /**
-     * 需要导出的用户组ID列表
-     * @type {Array<number>}
-     * @memberof InlineObject12
-     */
-    groupIds: Array<number>;
-    /**
      * 
-     * @type {ExportTasksDateRange}
+     * @type {VerificationData}
      * @memberof InlineObject12
      */
-    dateRange: ExportTasksDateRange;
+    verificationData: VerificationData;
     /**
-     * 需要导出的签到状态列表
-     * @type {Array<string>}
+     * 用户提交的签到时间（Unix时间戳，单位：秒），默认为当前时间
+     * @type {number}
      * @memberof InlineObject12
      */
-    statuses?: Array<InlineObject12StatusesEnum>;
+    signinTime?: number;
+    /**
+     * 用户组ID
+     * @type {number}
+     * @memberof InlineObject12
+     */
+    groupId?: number;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum InlineObject12StatusesEnum {
-    Success = 'success',
-    FailedLocation = 'failed_location',
-    FailedTime = 'failed_time',
-    FailedFace = 'failed_face',
-    FailedWifi = 'failed_wifi',
-    FailedNfc = 'failed_nfc',
-    FailedOther = 'failed_other',
-    PendingAudit = 'pending_audit',
-    AuditApproved = 'audit_approved',
-    AuditRejected = 'audit_rejected',
-    Absent = 'absent'
-}
-
 
 

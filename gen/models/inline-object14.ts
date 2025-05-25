@@ -14,23 +14,27 @@
 
 
 /**
- * 人脸验证请求数据
+ * 
  * @export
  * @interface InlineObject14
  */
 export interface InlineObject14 {
     /**
-     * 用户ID
-     * @type {number}
+     * 处理动作
+     * @type {string}
      * @memberof InlineObject14
      */
-    userId: number;
-    /**
-     * 待验证的人脸图像Base64编码数组
-     * @type {Array<string>}
-     * @memberof InlineObject14
-     */
-    faceImagesBase64: Array<string>;
+    action: InlineObject14ActionEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineObject14ActionEnum {
+    Approve = 'approve',
+    Reject = 'reject'
+}
+
 
 

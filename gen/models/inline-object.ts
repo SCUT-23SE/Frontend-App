@@ -26,11 +26,23 @@ export interface InlineObject {
      */
     username: string;
     /**
+     * 用户邮箱地址
+     * @type {string}
+     * @memberof InlineObject
+     */
+    email: string;
+    /**
      * 密码
      * @type {string}
      * @memberof InlineObject
      */
     password: string;
+    /**
+     * 邮箱验证码
+     * @type {string}
+     * @memberof InlineObject
+     */
+    verificationCode: string;
 }
 
 

@@ -30,9 +30,9 @@ import { Conflict } from '../models';
 // @ts-ignore
 import { Forbidden } from '../models';
 // @ts-ignore
-import { InlineObject10 } from '../models';
+import { InlineObject13 } from '../models';
 // @ts-ignore
-import { InlineObject11 } from '../models';
+import { InlineObject14 } from '../models';
 // @ts-ignore
 import { InternalServerError } from '../models';
 // @ts-ignore
@@ -57,13 +57,13 @@ export const AuditRequestsApiAxiosParamCreator = function (
      * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
      * @summary 处理签到审核申请
      * @param {number} auditRequestId 审核申请的 ID
-     * @param {InlineObject11} [inlineObject11]
+     * @param {InlineObject14} [inlineObject14]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     auditRequestsAuditRequestIdPut: async (
       auditRequestId: number,
-      inlineObject11?: InlineObject11,
+      inlineObject14?: InlineObject14,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'auditRequestId' is not null or undefined
@@ -107,11 +107,11 @@ export const AuditRequestsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject11 !== 'string' ||
+        typeof inlineObject14 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject11 !== undefined ? inlineObject11 : {})
-        : inlineObject11 || '';
+        ? JSON.stringify(inlineObject14 !== undefined ? inlineObject14 : {})
+        : inlineObject14 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -122,13 +122,13 @@ export const AuditRequestsApiAxiosParamCreator = function (
      * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
      * @summary 处理签到审核申请
      * @param {number} auditRequestId 审核申请的 ID
-     * @param {InlineObject11} [inlineObject11]
+     * @param {InlineObject14} [inlineObject14]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     auditRequestsAuditRequestIdPut_1: async (
       auditRequestId: number,
-      inlineObject11?: InlineObject11,
+      inlineObject14?: InlineObject14,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'auditRequestId' is not null or undefined
@@ -172,11 +172,11 @@ export const AuditRequestsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject11 !== 'string' ||
+        typeof inlineObject14 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject11 !== undefined ? inlineObject11 : {})
-        : inlineObject11 || '';
+        ? JSON.stringify(inlineObject14 !== undefined ? inlineObject14 : {})
+        : inlineObject14 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -187,13 +187,13 @@ export const AuditRequestsApiAxiosParamCreator = function (
      * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
      * @summary 提交签到异常审核申请
      * @param {number} taskId 相关的签到任务 ID
-     * @param {InlineObject10} [inlineObject10]
+     * @param {InlineObject13} [inlineObject13]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdAuditRequestsPost: async (
       taskId: number,
-      inlineObject10?: InlineObject10,
+      inlineObject13?: InlineObject13,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -237,11 +237,11 @@ export const AuditRequestsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject10 !== 'string' ||
+        typeof inlineObject13 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject10 !== undefined ? inlineObject10 : {})
-        : inlineObject10 || '';
+        ? JSON.stringify(inlineObject13 !== undefined ? inlineObject13 : {})
+        : inlineObject13 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -252,13 +252,13 @@ export const AuditRequestsApiAxiosParamCreator = function (
      * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
      * @summary 提交签到异常审核申请
      * @param {number} taskId 相关的签到任务 ID
-     * @param {InlineObject10} [inlineObject10]
+     * @param {InlineObject13} [inlineObject13]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdAuditRequestsPost_2: async (
       taskId: number,
-      inlineObject10?: InlineObject10,
+      inlineObject13?: InlineObject13,
       options: any = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'taskId' is not null or undefined
@@ -302,11 +302,11 @@ export const AuditRequestsApiAxiosParamCreator = function (
         ...options.headers,
       };
       const needsSerialization =
-        typeof inlineObject10 !== 'string' ||
+        typeof inlineObject13 !== 'string' ||
         localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject10 !== undefined ? inlineObject10 : {})
-        : inlineObject10 || '';
+        ? JSON.stringify(inlineObject13 !== undefined ? inlineObject13 : {})
+        : inlineObject13 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -534,20 +534,20 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
      * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
      * @summary 处理签到审核申请
      * @param {number} auditRequestId 审核申请的 ID
-     * @param {InlineObject11} [inlineObject11]
+     * @param {InlineObject14} [inlineObject14]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async auditRequestsAuditRequestIdPut(
       auditRequestId: number,
-      inlineObject11?: InlineObject11,
+      inlineObject14?: InlineObject14,
       options?: any
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Success>
     > {
       const localVarAxiosArgs = await AuditRequestsApiAxiosParamCreator(
         configuration
-      ).auditRequestsAuditRequestIdPut(auditRequestId, inlineObject11, options);
+      ).auditRequestsAuditRequestIdPut(auditRequestId, inlineObject14, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -563,13 +563,13 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
      * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
      * @summary 处理签到审核申请
      * @param {number} auditRequestId 审核申请的 ID
-     * @param {InlineObject11} [inlineObject11]
+     * @param {InlineObject14} [inlineObject14]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async auditRequestsAuditRequestIdPut_1(
       auditRequestId: number,
-      inlineObject11?: InlineObject11,
+      inlineObject14?: InlineObject14,
       options?: any
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Success>
@@ -578,7 +578,7 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
         configuration
       ).auditRequestsAuditRequestIdPut_1(
         auditRequestId,
-        inlineObject11,
+        inlineObject14,
         options
       );
       return (
@@ -596,13 +596,13 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
      * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
      * @summary 提交签到异常审核申请
      * @param {number} taskId 相关的签到任务 ID
-     * @param {InlineObject10} [inlineObject10]
+     * @param {InlineObject13} [inlineObject13]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdAuditRequestsPost(
       taskId: number,
-      inlineObject10?: InlineObject10,
+      inlineObject13?: InlineObject13,
       options?: any
     ): Promise<
       (
@@ -612,7 +612,7 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await AuditRequestsApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdAuditRequestsPost(taskId, inlineObject10, options);
+      ).checkinTasksTaskIdAuditRequestsPost(taskId, inlineObject13, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -628,13 +628,13 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
      * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
      * @summary 提交签到异常审核申请
      * @param {number} taskId 相关的签到任务 ID
-     * @param {InlineObject10} [inlineObject10]
+     * @param {InlineObject13} [inlineObject13]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async checkinTasksTaskIdAuditRequestsPost_2(
       taskId: number,
-      inlineObject10?: InlineObject10,
+      inlineObject13?: InlineObject13,
       options?: any
     ): Promise<
       (
@@ -644,7 +644,7 @@ export const AuditRequestsApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await AuditRequestsApiAxiosParamCreator(
         configuration
-      ).checkinTasksTaskIdAuditRequestsPost_2(taskId, inlineObject10, options);
+      ).checkinTasksTaskIdAuditRequestsPost_2(taskId, inlineObject13, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -793,36 +793,36 @@ export const AuditRequestsApiFactory = function (
      * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
      * @summary 处理签到审核申请
      * @param {number} auditRequestId 审核申请的 ID
-     * @param {InlineObject11} [inlineObject11]
+     * @param {InlineObject14} [inlineObject14]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     auditRequestsAuditRequestIdPut(
       auditRequestId: number,
-      inlineObject11?: InlineObject11,
+      inlineObject14?: InlineObject14,
       options?: any
     ): AxiosPromise<Success> {
       return AuditRequestsApiFp(configuration)
-        .auditRequestsAuditRequestIdPut(auditRequestId, inlineObject11, options)
+        .auditRequestsAuditRequestIdPut(auditRequestId, inlineObject14, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
      * @summary 处理签到审核申请
      * @param {number} auditRequestId 审核申请的 ID
-     * @param {InlineObject11} [inlineObject11]
+     * @param {InlineObject14} [inlineObject14]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     auditRequestsAuditRequestIdPut_1(
       auditRequestId: number,
-      inlineObject11?: InlineObject11,
+      inlineObject14?: InlineObject14,
       options?: any
     ): AxiosPromise<Success> {
       return AuditRequestsApiFp(configuration)
         .auditRequestsAuditRequestIdPut_1(
           auditRequestId,
-          inlineObject11,
+          inlineObject14,
           options
         )
         .then((request) => request(axios, basePath));
@@ -831,34 +831,34 @@ export const AuditRequestsApiFactory = function (
      * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
      * @summary 提交签到异常审核申请
      * @param {number} taskId 相关的签到任务 ID
-     * @param {InlineObject10} [inlineObject10]
+     * @param {InlineObject13} [inlineObject13]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdAuditRequestsPost(
       taskId: number,
-      inlineObject10?: InlineObject10,
+      inlineObject13?: InlineObject13,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return AuditRequestsApiFp(configuration)
-        .checkinTasksTaskIdAuditRequestsPost(taskId, inlineObject10, options)
+        .checkinTasksTaskIdAuditRequestsPost(taskId, inlineObject13, options)
         .then((request) => request(axios, basePath));
     },
     /**
      * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
      * @summary 提交签到异常审核申请
      * @param {number} taskId 相关的签到任务 ID
-     * @param {InlineObject10} [inlineObject10]
+     * @param {InlineObject13} [inlineObject13]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     checkinTasksTaskIdAuditRequestsPost_2(
       taskId: number,
-      inlineObject10?: InlineObject10,
+      inlineObject13?: InlineObject13,
       options?: any
     ): AxiosPromise<SuccessWithData & object> {
       return AuditRequestsApiFp(configuration)
-        .checkinTasksTaskIdAuditRequestsPost_2(taskId, inlineObject10, options)
+        .checkinTasksTaskIdAuditRequestsPost_2(taskId, inlineObject13, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -935,18 +935,18 @@ export class AuditRequestsApi extends BaseAPI {
    * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
    * @summary 处理签到审核申请
    * @param {number} auditRequestId 审核申请的 ID
-   * @param {InlineObject11} [inlineObject11]
+   * @param {InlineObject14} [inlineObject14]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AuditRequestsApi
    */
   public auditRequestsAuditRequestIdPut(
     auditRequestId: number,
-    inlineObject11?: InlineObject11,
+    inlineObject14?: InlineObject14,
     options?: any
   ) {
     return AuditRequestsApiFp(this.configuration)
-      .auditRequestsAuditRequestIdPut(auditRequestId, inlineObject11, options)
+      .auditRequestsAuditRequestIdPut(auditRequestId, inlineObject14, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -954,18 +954,18 @@ export class AuditRequestsApi extends BaseAPI {
    * 用户组管理员批准或拒绝签到审核申请。批准后将创建成功的签到记录。
    * @summary 处理签到审核申请
    * @param {number} auditRequestId 审核申请的 ID
-   * @param {InlineObject11} [inlineObject11]
+   * @param {InlineObject14} [inlineObject14]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AuditRequestsApi
    */
   public auditRequestsAuditRequestIdPut_1(
     auditRequestId: number,
-    inlineObject11?: InlineObject11,
+    inlineObject14?: InlineObject14,
     options?: any
   ) {
     return AuditRequestsApiFp(this.configuration)
-      .auditRequestsAuditRequestIdPut_1(auditRequestId, inlineObject11, options)
+      .auditRequestsAuditRequestIdPut_1(auditRequestId, inlineObject14, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -973,18 +973,18 @@ export class AuditRequestsApi extends BaseAPI {
    * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
    * @summary 提交签到异常审核申请
    * @param {number} taskId 相关的签到任务 ID
-   * @param {InlineObject10} [inlineObject10]
+   * @param {InlineObject13} [inlineObject13]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AuditRequestsApi
    */
   public checkinTasksTaskIdAuditRequestsPost(
     taskId: number,
-    inlineObject10?: InlineObject10,
+    inlineObject13?: InlineObject13,
     options?: any
   ) {
     return AuditRequestsApiFp(this.configuration)
-      .checkinTasksTaskIdAuditRequestsPost(taskId, inlineObject10, options)
+      .checkinTasksTaskIdAuditRequestsPost(taskId, inlineObject13, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -992,18 +992,18 @@ export class AuditRequestsApi extends BaseAPI {
    * 当用户无法通过常规方式成功签到时，可以提交异常情况说明和证明，申请人工审核。审核通过后才会生成签到记录。
    * @summary 提交签到异常审核申请
    * @param {number} taskId 相关的签到任务 ID
-   * @param {InlineObject10} [inlineObject10]
+   * @param {InlineObject13} [inlineObject13]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AuditRequestsApi
    */
   public checkinTasksTaskIdAuditRequestsPost_2(
     taskId: number,
-    inlineObject10?: InlineObject10,
+    inlineObject13?: InlineObject13,
     options?: any
   ) {
     return AuditRequestsApiFp(this.configuration)
-      .checkinTasksTaskIdAuditRequestsPost_2(taskId, inlineObject10, options)
+      .checkinTasksTaskIdAuditRequestsPost_2(taskId, inlineObject13, options)
       .then((request) => request(this.axios, this.basePath));
   }
 

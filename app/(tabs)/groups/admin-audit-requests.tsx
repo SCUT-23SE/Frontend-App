@@ -177,7 +177,7 @@ export default function AdminAuditRequestsScreen() {
         <Text style={styles.reasonText}>{item.reason}</Text>
       </View>
 
-      {item.proofImageUrls && item.proofImageUrls.length > 0 && (
+      {item.proofImageUrls && item.proofImageUrls.length > 0 ? (
         <View style={styles.proofContainer}>
           <TouchableOpacity
             style={styles.proofHeader}
@@ -203,7 +203,7 @@ export default function AdminAuditRequestsScreen() {
             </View>
           )}
         </View>
-      )}
+      ) : null}
 
       {item.status === AuditRequestStatusEnum.Pending ? (
         <View style={styles.actions}>

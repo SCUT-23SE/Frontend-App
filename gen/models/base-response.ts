@@ -12,7 +12,6 @@
  */
 
 
-import { Strings } from './strings';
 
 /**
  * 
@@ -22,7 +21,7 @@ import { Strings } from './strings';
 export interface BaseResponse {
     /**
      * 响应码，0表示成功，1表示失败
-     * @type {Strings}
+     * @type {string}
      * @memberof BaseResponse
      */
     code: BaseResponseCodeEnum;

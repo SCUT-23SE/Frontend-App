@@ -20,27 +20,17 @@
  */
 export interface InlineObject5 {
     /**
-     * 处理动作
+     * 用户组名称
      * @type {string}
      * @memberof InlineObject5
      */
-    action: InlineObject5ActionEnum;
+    groupName: string;
     /**
-     * 拒绝理由 (当 action 为 reject 时可选)
+     * 用户组描述
      * @type {string}
      * @memberof InlineObject5
      */
-    rejectReason?: string;
+    description?: string;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum InlineObject5ActionEnum {
-    Approve = 'approve',
-    Reject = 'reject'
-}
-
 
 

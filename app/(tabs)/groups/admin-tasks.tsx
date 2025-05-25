@@ -8,21 +8,71 @@ import {
   RefreshControl,
   Alert,
   ActivityIndicator,
+  ViewStyle,
+  TextStyle,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   MapPin,
   Camera,
   Wifi,
-  CircleCheck as CheckCircle2,
+  CircleCheck,
   Clock,
-  CreditCard as Edit,
+  Edit,
   Copy,
   Trash,
   Plus,
 } from 'lucide-react-native';
 import { useAdminTasksStore } from '@/stores/admin-tasks';
 import type { AdminTaskType } from '@/types/tasks';
+import Card from '@/components/Card';
+import Badge from '@/components/Badge';
+import Button from '@/components/Button';
+import THEME, { FONTS, SIZES } from '@/utils/theme';
+
+// --- Style Constants ---
+const APP_BACKGROUND = '#F8F8FA';
+const CARD_BACKGROUND = '#FFFFFF';
+const PRIMARY_BLUE = '#007AFF';
+const PRIMARY_TEXT_COLOR = '#1C1C1E'; // Darker, more like iOS system black
+const SECONDARY_TEXT_COLOR = '#8A8A8E'; // iOS secondary gray
+const LIGHT_GRAY_BORDER = '#E5E5EA'; // Lighter border
+const ICON_BLUE = PRIMARY_BLUE;
+
+// Badge Colors (Background, Text)
+const BADGE_SUCCESS_BG = '#E6F7EA'; // Light Green
+const BADGE_SUCCESS_TEXT = '#389E0D'; // Dark Green
+const BADGE_WARNING_BG = '#FFFBE6'; // Light Orange/Yellow
+const BADGE_WARNING_TEXT = '#FA8C16'; // Dark Orange/Yellow
+const BADGE_ERROR_BG = '#FFF1F0'; // Light Red
+const BADGE_ERROR_TEXT = '#FF4D4F'; // Dark Red
+const BADGE_INFO_BG = '#E0F2FF'; // Light Blue
+const BADGE_INFO_TEXT = PRIMARY_BLUE; // Blue
+const BADGE_NEUTRAL_BG = '#F0F0F0'; // Light Gray
+const BADGE_NEUTRAL_TEXT = '#595959'; // Dark Gray
+
+const CARD_BORDER_RADIUS = 12;
+const BADGE_PILL_RADIUS = 16; // For pill shape badges
+
+const PADDING_XS = 4;
+const PADDING_S = 8;
+const PADDING_M = 12;
+const PADDING_L = 16;
+const PADDING_XL = 20;
+
+const MARGIN_S = 8;
+const MARGIN_M = 12;
+const MARGIN_L = 16;
+
+const FONT_SIZE_S = 12;
+const FONT_SIZE_M = 14;
+const FONT_SIZE_L = 16;
+const FONT_SIZE_XL = 17;
+
+const FONT_WEIGHT_REGULAR = '400';
+const FONT_WEIGHT_MEDIUM = '500';
+const FONT_WEIGHT_SEMIBOLD = '600';
+const FONT_WEIGHT_BOLD = '700';
 
 export default function AdminTasksScreen() {
   const { id: groupId } = useLocalSearchParams();
@@ -79,16 +129,16 @@ export default function AdminTasksScreen() {
     ]);
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusVariant = (status: string) => {
     switch (status) {
       case 'ongoing':
-        return '#4CAF50';
+        return 'success';
       case 'upcoming':
-        return '#FF9800';
+        return 'warning';
       case 'expired':
-        return '#F44336';
+        return 'error';
       default:
-        return '#999';
+        return 'default';
     }
   };
 
@@ -106,22 +156,19 @@ export default function AdminTasksScreen() {
   };
 
   const renderTask = ({ item }: { item: AdminTaskType }) => (
-    <View style={styles.taskCard}>
+    <Card style={styles.taskCard}>
       <View style={styles.taskHeader}>
         <Text style={styles.taskTitle}>{item.title}</Text>
-        <View
-          style={[
-            styles.statusBadge,
-            { backgroundColor: getStatusColor(item.status) },
-          ]}
-        >
-          <Text style={styles.statusText}>{getStatusText(item.status)}</Text>
-        </View>
+        <Badge
+          text={getStatusText(item.status)}
+          variant={getStatusVariant(item.status) as any}
+          size="small"
+        />
       </View>
 
       <View style={styles.taskInfo}>
         <View style={styles.infoItem}>
-          <Clock size={16} color="#666" />
+          <Clock size={16} color={SECONDARY_TEXT_COLOR} />
           <Text style={styles.infoText}>
             {new Date(item.startTime).toLocaleString()} -{' '}
             {new Date(item.endTime).toLocaleString()}
@@ -132,19 +179,19 @@ export default function AdminTasksScreen() {
       <View style={styles.taskTypes}>
         {item.type.gps && (
           <View style={styles.typeItem}>
-            <MapPin size={16} color="#4A90E2" />
+            <MapPin size={16} color={ICON_BLUE} />
             <Text style={styles.typeText}>位置</Text>
           </View>
         )}
         {item.type.face && (
           <View style={styles.typeItem}>
-            <Camera size={16} color="#4A90E2" />
+            <Camera size={16} color={ICON_BLUE} />
             <Text style={styles.typeText}>人脸</Text>
           </View>
         )}
         {item.type.wifi && (
           <View style={styles.typeItem}>
-            <Wifi size={16} color="#4A90E2" />
+            <Wifi size={16} color={ICON_BLUE} />
             <Text style={styles.typeText}>WiFi</Text>
           </View>
         )}
@@ -155,34 +202,34 @@ export default function AdminTasksScreen() {
           style={styles.actionButton}
           onPress={() => handleEditTask(item)}
         >
-          <Edit size={20} color="#4A90E2" />
+          <Edit size={20} color={ICON_BLUE} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionButton}
           onPress={() => handleCopyTask(item)}
         >
-          <Copy size={20} color="#4CAF50" />
+          <Copy size={20} color={BADGE_SUCCESS_TEXT} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionButton}
           onPress={() => handleDeleteTask(item.id)}
         >
-          <Trash size={20} color="#F44336" />
+          <Trash size={20} color={BADGE_ERROR_TEXT} />
         </TouchableOpacity>
       </View>
-    </View>
+    </Card>
   );
 
   if (error) {
     return (
       <View style={styles.centerContainer}>
         <Text style={styles.errorText}>{error}</Text>
-        <TouchableOpacity
-          style={styles.retryButton}
+        <Button
+          title="重试"
           onPress={() => fetchTasks(groupId as string)}
-        >
-          <Text style={styles.retryText}>重试</Text>
-        </TouchableOpacity>
+          variant="primary"
+          size="medium"
+        />
       </View>
     );
   }
@@ -198,6 +245,8 @@ export default function AdminTasksScreen() {
           <RefreshControl
             refreshing={loading}
             onRefresh={() => fetchTasks(groupId as string)}
+            colors={[PRIMARY_BLUE]}
+            tintColor={PRIMARY_BLUE}
           />
         }
         ListEmptyComponent={
@@ -212,12 +261,12 @@ export default function AdminTasksScreen() {
 
       {operationStatus.loading && (
         <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#4A90E2" />
+          <ActivityIndicator size="large" color={PRIMARY_BLUE} />
         </View>
       )}
 
       <TouchableOpacity style={styles.fab} onPress={handleCreateTask}>
-        <Plus size={24} color="#fff" />
+        <Plus size={24} color={CARD_BACKGROUND} />
       </TouchableOpacity>
     </View>
   );
@@ -226,150 +275,124 @@ export default function AdminTasksScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
+    backgroundColor: APP_BACKGROUND,
+  } as ViewStyle,
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-  },
+    padding: PADDING_L,
+    backgroundColor: APP_BACKGROUND,
+  } as ViewStyle,
   listContainer: {
-    padding: 16,
+    padding: PADDING_M,
     paddingBottom: 80,
-  },
+  } as ViewStyle,
   taskCard: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
+    backgroundColor: CARD_BACKGROUND,
+    borderRadius: CARD_BORDER_RADIUS,
+    padding: PADDING_L,
+    marginBottom: MARGIN_M,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 6,
+  } as ViewStyle,
   taskHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
-  },
+    marginBottom: MARGIN_M,
+  } as ViewStyle,
   taskTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
+    fontSize: FONT_SIZE_L,
+    fontWeight: FONT_WEIGHT_SEMIBOLD,
+    color: PRIMARY_TEXT_COLOR,
     flex: 1,
-  },
-  statusBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
-    marginLeft: 8,
-  },
-  statusText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: '500',
-  },
+    marginRight: MARGIN_S,
+  } as TextStyle,
   taskInfo: {
-    marginBottom: 12,
-  },
+    marginBottom: MARGIN_M,
+  } as ViewStyle,
   infoItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
-  },
+    marginBottom: PADDING_XS,
+  } as ViewStyle,
   infoText: {
-    fontSize: 14,
-    color: '#666',
-    marginLeft: 8,
-  },
+    fontSize: FONT_SIZE_M,
+    color: SECONDARY_TEXT_COLOR,
+    marginLeft: MARGIN_S,
+  } as TextStyle,
   taskTypes: {
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-    paddingTop: 12,
-    marginBottom: 12,
-  },
+    borderTopColor: LIGHT_GRAY_BORDER,
+    paddingTop: PADDING_M,
+    marginBottom: MARGIN_M,
+  } as ViewStyle,
   typeItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 16,
-  },
+    marginRight: MARGIN_M,
+  } as ViewStyle,
   typeText: {
-    fontSize: 14,
-    color: '#4A90E2',
-    marginLeft: 4,
-  },
+    fontSize: FONT_SIZE_S,
+    color: ICON_BLUE,
+    marginLeft: PADDING_XS,
+  } as TextStyle,
   actions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-    paddingTop: 12,
-  },
+    borderTopColor: LIGHT_GRAY_BORDER,
+    paddingTop: PADDING_M,
+  } as ViewStyle,
   actionButton: {
-    padding: 8,
-    marginLeft: 16,
-  },
+    padding: PADDING_S,
+    marginLeft: PADDING_L,
+  } as ViewStyle,
   emptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 32,
-  },
+    paddingVertical: PADDING_L,
+  } as ViewStyle,
   emptyText: {
-    fontSize: 16,
-    color: '#999',
-    marginBottom: 8,
-  },
+    fontSize: FONT_SIZE_M,
+    color: SECONDARY_TEXT_COLOR,
+    marginBottom: MARGIN_S,
+  } as TextStyle,
   emptySubText: {
-    fontSize: 14,
-    color: '#999',
-  },
+    fontSize: FONT_SIZE_S,
+    color: SECONDARY_TEXT_COLOR,
+  } as TextStyle,
   fab: {
     position: 'absolute',
-    right: 16,
-    bottom: 16,
+    right: MARGIN_L,
+    bottom: MARGIN_L,
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#4A90E2',
+    backgroundColor: PRIMARY_BLUE,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowColor: 'rgba(0, 0, 0, 0.3)',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 5,
     elevation: 5,
-  },
+  } as ViewStyle,
   loadingOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   errorText: {
-    fontSize: 16,
-    color: '#F44336',
-    marginBottom: 16,
+    fontSize: FONT_SIZE_M,
+    color: BADGE_ERROR_TEXT,
+    marginBottom: MARGIN_M,
     textAlign: 'center',
-  },
-  retryButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: '#4A90E2',
-    borderRadius: 8,
-  },
-  retryText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '500',
-  },
+  } as TextStyle,
 });

@@ -20,11 +20,23 @@
  */
 export interface InlineObject4 {
     /**
-     * 申请理由 (可选)
+     * 用户注册的邮箱地址
      * @type {string}
      * @memberof InlineObject4
      */
-    reason?: string;
+    email: string;
+    /**
+     * 邮箱验证码
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    verificationCode: string;
+    /**
+     * 新密码
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    newPassword: string;
 }
 
 

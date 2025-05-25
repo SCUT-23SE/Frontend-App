@@ -24,6 +24,7 @@ interface CheckInVerificationState {
   gps: VerificationItemState;
   face: VerificationItemState;
   wifi: VerificationItemState;
+  nfc: VerificationItemState; // 添加NFC验证状态
 }
 
 // 最终提交状态
@@ -69,11 +70,12 @@ interface TasksState {
     taskId: string,
     location: { latitude: number; longitude: number }
   ) => Promise<void>;
-  verifyFace: (taskId: string, faceData: string) => Promise<void>;
+  verifyFace: (taskId: string, faceImages: string[]) => Promise<void>;
   verifyWifi: (
     taskId: string,
     wifiInfo: { ssid: string; bssid: string }
   ) => Promise<void>;
+  verifyNfc: (taskId: string, nfcId: string) => Promise<void>;
 
   // 最终提交方法
   submitFinalCheckIn: (taskId: string, groupId?: number) => Promise<void>;
@@ -100,6 +102,7 @@ const initialVerificationState: CheckInVerificationState = {
   gps: { ...initialVerificationItemState },
   face: { ...initialVerificationItemState },
   wifi: { ...initialVerificationItemState },
+  nfc: { ...initialVerificationItemState }, // 初始化NFC验证状态
 };
 
 const initialSubmissionState: SubmitState = {
@@ -191,35 +194,72 @@ export const useTasksStore = create<TasksState>((set, get) => ({
     }
   },
 
-  verifyFace: async (taskId, faceData) => {
-    set((state) => ({
-      verification: { ...state.verification, face: { status: 'verifying' } },
-    }));
-    try {
-      const result = await checkInService.verifyCheckInType(taskId, 'face', {
-        faceData,
-      });
-      set((state) => ({
-        verification: {
-          ...state.verification,
-          face: {
-            status: result.verified ? 'success' : 'failed',
-            reason: result.message,
-            data: result.verified ? faceData : undefined, // 只有在验证成功时才保存人脸数据
-          },
-        },
-      }));
-    } catch (error) {
-      console.error('Face Verification Error:', error);
+  verifyFace: async (taskId, faceImages) => {
+    // 确保收到的照片数组长度为5
+    if (!faceImages || faceImages.length !== 5) {
+      console.error(
+        `人脸验证错误: 照片数量应为5张，实际收到${faceImages?.length || 0}张`
+      );
       set((state) => ({
         verification: {
           ...state.verification,
           face: {
             status: 'failed',
-            reason: error instanceof Error ? error.message : '人脸验证请求失败',
+            reason: `人脸数据数量不正确，期望5张，实际${
+              faceImages?.length || 0
+            }张`,
           },
         },
       }));
+      return;
+    }
+
+    // 如果已经验证成功，不再进行新的验证
+    const currentState = get().verification;
+    if (currentState.face.status === 'success') {
+      return;
+    }
+
+    set((state) => ({
+      verification: { ...state.verification, face: { status: 'verifying' } },
+    }));
+    try {
+      const result = await checkInService.verifyCheckInType(taskId, 'face', {
+        faceDataArray: faceImages,
+      });
+
+      // 只有在当前状态不是success的情况下才更新状态
+      // 这确保了一旦有一次验证成功，后续的验证结果不会覆盖成功状态
+      const currentStateAfterRequest = get().verification;
+      if (currentStateAfterRequest.face.status !== 'success') {
+        set((state) => ({
+          verification: {
+            ...state.verification,
+            face: {
+              status: result.verified ? 'success' : 'failed',
+              reason: result.message,
+              data: result.verified ? faceImages[0] : undefined,
+            },
+          },
+        }));
+      }
+    } catch (error) {
+      console.error('Face Verification Error:', error);
+
+      // 同样，只有在当前状态不是success的情况下才更新为失败状态
+      const currentStateAfterError = get().verification;
+      if (currentStateAfterError.face.status !== 'success') {
+        set((state) => ({
+          verification: {
+            ...state.verification,
+            face: {
+              status: 'failed',
+              reason:
+                error instanceof Error ? error.message : '人脸验证请求失败',
+            },
+          },
+        }));
+      }
     }
   },
 
@@ -249,6 +289,38 @@ export const useTasksStore = create<TasksState>((set, get) => ({
           wifi: {
             status: 'failed',
             reason: error instanceof Error ? error.message : 'WiFi验证请求失败',
+          },
+        },
+      }));
+    }
+  },
+
+  verifyNfc: async (taskId, nfcId) => {
+    set((state) => ({
+      verification: { ...state.verification, nfc: { status: 'verifying' } },
+    }));
+    try {
+      const result = await checkInService.verifyCheckInType(taskId, 'nfc', {
+        nfcId,
+      });
+      set((state) => ({
+        verification: {
+          ...state.verification,
+          nfc: {
+            status: result.verified ? 'success' : 'failed',
+            reason: result.message,
+            data: result.verified ? nfcId : undefined, // 只有在验证成功时才保存NFC数据
+          },
+        },
+      }));
+    } catch (error) {
+      console.error('NFC Verification Error:', error);
+      set((state) => ({
+        verification: {
+          ...state.verification,
+          nfc: {
+            status: 'failed',
+            reason: error instanceof Error ? error.message : 'NFC验证请求失败',
           },
         },
       }));
@@ -355,7 +427,9 @@ export const useTasksStore = create<TasksState>((set, get) => ({
 
   // --- 重置方法 ---
   resetVerificationStates: () => {
-    set({ verification: { ...initialVerificationState } });
+    set({
+      verification: { ...initialVerificationState },
+    });
   },
 
   resetSubmissionState: () => {

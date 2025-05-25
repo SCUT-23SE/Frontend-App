@@ -26,11 +26,7 @@ import {
 // @ts-ignore
 import { BaseResponse } from '../models';
 // @ts-ignore
-import { InlineObject12 } from '../models';
-// @ts-ignore
 import { InternalServerError } from '../models';
-// @ts-ignore
-import { SuccessWithData } from '../models';
 /**
  * ExportApi - axios parameter creator
  * @export
@@ -40,82 +36,44 @@ export const ExportApiAxiosParamCreator = function (
 ) {
   return {
     /**
-     * 下载指定的导出文件
-     * @summary 下载导出文件
-     * @param {string} fileName 导出文件名
+     * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+     * @summary 导出签到记录为XLSX文件
+     * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+     * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+     * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+     * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    exportFilesFileNameGet: async (
-      fileName: string,
+    exportCheckinsXlsxGet: async (
+      groupIds: Array<number>,
+      dateStart: number,
+      dateEnd: number,
+      statuses?: Array<'success' | 'absent' | 'exception'>,
       options: any = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'fileName' is not null or undefined
-      if (fileName === null || fileName === undefined) {
+      // verify required parameter 'groupIds' is not null or undefined
+      if (groupIds === null || groupIds === undefined) {
         throw new RequiredError(
-          'fileName',
-          'Required parameter fileName was null or undefined when calling exportFilesFileNameGet.'
+          'groupIds',
+          'Required parameter groupIds was null or undefined when calling exportCheckinsXlsxGet.'
         );
       }
-      const localVarPath = `/export/files/{fileName}`.replace(
-        `{${'fileName'}}`,
-        encodeURIComponent(String(fileName))
-      );
-      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-      const localVarRequestOptions = {
-        method: 'GET',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarUrlObj.query = {
-        ...localVarUrlObj.query,
-        ...localVarQueryParameter,
-        ...options.query,
-      };
-      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-      delete localVarUrlObj.search;
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: globalImportUrl.format(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     * 下载指定的导出文件
-     * @summary 下载导出文件
-     * @param {string} fileName 导出文件名
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportFilesFileNameGet_1: async (
-      fileName: string,
-      options: any = {}
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'fileName' is not null or undefined
-      if (fileName === null || fileName === undefined) {
+      // verify required parameter 'dateStart' is not null or undefined
+      if (dateStart === null || dateStart === undefined) {
         throw new RequiredError(
-          'fileName',
-          'Required parameter fileName was null or undefined when calling exportFilesFileNameGet_1.'
+          'dateStart',
+          'Required parameter dateStart was null or undefined when calling exportCheckinsXlsxGet.'
         );
       }
-      const localVarPath = `/export/files/{fileName}`.replace(
-        `{${'fileName'}}`,
-        encodeURIComponent(String(fileName))
-      );
+      // verify required parameter 'dateEnd' is not null or undefined
+      if (dateEnd === null || dateEnd === undefined) {
+        throw new RequiredError(
+          'dateEnd',
+          'Required parameter dateEnd was null or undefined when calling exportCheckinsXlsxGet.'
+        );
+      }
+      const localVarPath = `/export/checkins.xlsx`;
       const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
       let baseOptions;
       if (configuration) {
@@ -128,6 +86,22 @@ export const ExportApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      if (groupIds) {
+        localVarQueryParameter['groupIds'] = groupIds;
+      }
+
+      if (dateStart !== undefined) {
+        localVarQueryParameter['dateStart'] = dateStart;
+      }
+
+      if (dateEnd !== undefined) {
+        localVarQueryParameter['dateEnd'] = dateEnd;
+      }
+
+      if (statuses) {
+        localVarQueryParameter['statuses'] = statuses;
+      }
 
       localVarUrlObj.query = {
         ...localVarUrlObj.query,
@@ -150,113 +124,72 @@ export const ExportApiAxiosParamCreator = function (
       };
     },
     /**
-     * 获取当前用户创建的所有导出任务及状态
-     * @summary 获取导出任务列表
+     * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+     * @summary 导出签到记录为XLSX文件
+     * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+     * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+     * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+     * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    exportTasksGet: async (options: any = {}): Promise<RequestArgs> => {
-      const localVarPath = `/export/tasks`;
-      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-      const localVarRequestOptions = {
-        method: 'GET',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarUrlObj.query = {
-        ...localVarUrlObj.query,
-        ...localVarQueryParameter,
-        ...options.query,
-      };
-      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-      delete localVarUrlObj.search;
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: globalImportUrl.format(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     * 获取当前用户创建的所有导出任务及状态
-     * @summary 获取导出任务列表
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksGet_2: async (options: any = {}): Promise<RequestArgs> => {
-      const localVarPath = `/export/tasks`;
-      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-      const localVarRequestOptions = {
-        method: 'GET',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarUrlObj.query = {
-        ...localVarUrlObj.query,
-        ...localVarQueryParameter,
-        ...options.query,
-      };
-      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-      delete localVarUrlObj.search;
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: globalImportUrl.format(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     * 根据指定的参数创建新的签到数据导出任务
-     * @summary 创建导出任务
-     * @param {InlineObject12} [inlineObject12]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksPost: async (
-      inlineObject12?: InlineObject12,
+    exportCheckinsXlsxGet_1: async (
+      groupIds: Array<number>,
+      dateStart: number,
+      dateEnd: number,
+      statuses?: Array<'success' | 'absent' | 'exception'>,
       options: any = {}
     ): Promise<RequestArgs> => {
-      const localVarPath = `/export/tasks`;
+      // verify required parameter 'groupIds' is not null or undefined
+      if (groupIds === null || groupIds === undefined) {
+        throw new RequiredError(
+          'groupIds',
+          'Required parameter groupIds was null or undefined when calling exportCheckinsXlsxGet_1.'
+        );
+      }
+      // verify required parameter 'dateStart' is not null or undefined
+      if (dateStart === null || dateStart === undefined) {
+        throw new RequiredError(
+          'dateStart',
+          'Required parameter dateStart was null or undefined when calling exportCheckinsXlsxGet_1.'
+        );
+      }
+      // verify required parameter 'dateEnd' is not null or undefined
+      if (dateEnd === null || dateEnd === undefined) {
+        throw new RequiredError(
+          'dateEnd',
+          'Required parameter dateEnd was null or undefined when calling exportCheckinsXlsxGet_1.'
+        );
+      }
+      const localVarPath = `/export/checkins.xlsx`;
       const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
       let baseOptions;
       if (configuration) {
         baseOptions = configuration.baseOptions;
       }
       const localVarRequestOptions = {
-        method: 'POST',
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json';
+      if (groupIds) {
+        localVarQueryParameter['groupIds'] = groupIds;
+      }
+
+      if (dateStart !== undefined) {
+        localVarQueryParameter['dateStart'] = dateStart;
+      }
+
+      if (dateEnd !== undefined) {
+        localVarQueryParameter['dateEnd'] = dateEnd;
+      }
+
+      if (statuses) {
+        localVarQueryParameter['statuses'] = statuses;
+      }
 
       localVarUrlObj.query = {
         ...localVarUrlObj.query,
@@ -272,65 +205,6 @@ export const ExportApiAxiosParamCreator = function (
         ...headersFromBaseOptions,
         ...options.headers,
       };
-      const needsSerialization =
-        typeof inlineObject12 !== 'string' ||
-        localVarRequestOptions.headers['Content-Type'] === 'application/json';
-      localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject12 !== undefined ? inlineObject12 : {})
-        : inlineObject12 || '';
-
-      return {
-        url: globalImportUrl.format(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     * 根据指定的参数创建新的签到数据导出任务
-     * @summary 创建导出任务
-     * @param {InlineObject12} [inlineObject12]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksPost_3: async (
-      inlineObject12?: InlineObject12,
-      options: any = {}
-    ): Promise<RequestArgs> => {
-      const localVarPath = `/export/tasks`;
-      const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-      const localVarRequestOptions = {
-        method: 'POST',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarHeaderParameter['Content-Type'] = 'application/json';
-
-      localVarUrlObj.query = {
-        ...localVarUrlObj.query,
-        ...localVarQueryParameter,
-        ...options.query,
-      };
-      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-      delete localVarUrlObj.search;
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      const needsSerialization =
-        typeof inlineObject12 !== 'string' ||
-        localVarRequestOptions.headers['Content-Type'] === 'application/json';
-      localVarRequestOptions.data = needsSerialization
-        ? JSON.stringify(inlineObject12 !== undefined ? inlineObject12 : {})
-        : inlineObject12 || '';
 
       return {
         url: globalImportUrl.format(localVarUrlObj),
@@ -347,21 +221,27 @@ export const ExportApiAxiosParamCreator = function (
 export const ExportApiFp = function (configuration?: Configuration) {
   return {
     /**
-     * 下载指定的导出文件
-     * @summary 下载导出文件
-     * @param {string} fileName 导出文件名
+     * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+     * @summary 导出签到记录为XLSX文件
+     * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+     * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+     * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+     * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async exportFilesFileNameGet(
-      fileName: string,
+    async exportCheckinsXlsxGet(
+      groupIds: Array<number>,
+      dateStart: number,
+      dateEnd: number,
+      statuses?: Array<'success' | 'absent' | 'exception'>,
       options?: any
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>
     > {
       const localVarAxiosArgs = await ExportApiAxiosParamCreator(
         configuration
-      ).exportFilesFileNameGet(fileName, options);
+      ).exportCheckinsXlsxGet(groupIds, dateStart, dateEnd, statuses, options);
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -374,137 +254,33 @@ export const ExportApiFp = function (configuration?: Configuration) {
       };
     },
     /**
-     * 下载指定的导出文件
-     * @summary 下载导出文件
-     * @param {string} fileName 导出文件名
+     * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+     * @summary 导出签到记录为XLSX文件
+     * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+     * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+     * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+     * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async exportFilesFileNameGet_1(
-      fileName: string,
+    async exportCheckinsXlsxGet_1(
+      groupIds: Array<number>,
+      dateStart: number,
+      dateEnd: number,
+      statuses?: Array<'success' | 'absent' | 'exception'>,
       options?: any
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>
     > {
       const localVarAxiosArgs = await ExportApiAxiosParamCreator(
         configuration
-      ).exportFilesFileNameGet_1(fileName, options);
-      return (
-        axios: AxiosInstance = globalAxios,
-        basePath: string = BASE_PATH
-      ) => {
-        const axiosRequestArgs = {
-          ...localVarAxiosArgs.options,
-          url: basePath + localVarAxiosArgs.url,
-        };
-        return axios.request(axiosRequestArgs);
-      };
-    },
-    /**
-     * 获取当前用户创建的所有导出任务及状态
-     * @summary 获取导出任务列表
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async exportTasksGet(
-      options?: any
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<SuccessWithData & object>
-    > {
-      const localVarAxiosArgs = await ExportApiAxiosParamCreator(
-        configuration
-      ).exportTasksGet(options);
-      return (
-        axios: AxiosInstance = globalAxios,
-        basePath: string = BASE_PATH
-      ) => {
-        const axiosRequestArgs = {
-          ...localVarAxiosArgs.options,
-          url: basePath + localVarAxiosArgs.url,
-        };
-        return axios.request(axiosRequestArgs);
-      };
-    },
-    /**
-     * 获取当前用户创建的所有导出任务及状态
-     * @summary 获取导出任务列表
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async exportTasksGet_2(
-      options?: any
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<SuccessWithData & object>
-    > {
-      const localVarAxiosArgs = await ExportApiAxiosParamCreator(
-        configuration
-      ).exportTasksGet_2(options);
-      return (
-        axios: AxiosInstance = globalAxios,
-        basePath: string = BASE_PATH
-      ) => {
-        const axiosRequestArgs = {
-          ...localVarAxiosArgs.options,
-          url: basePath + localVarAxiosArgs.url,
-        };
-        return axios.request(axiosRequestArgs);
-      };
-    },
-    /**
-     * 根据指定的参数创建新的签到数据导出任务
-     * @summary 创建导出任务
-     * @param {InlineObject12} [inlineObject12]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async exportTasksPost(
-      inlineObject12?: InlineObject12,
-      options?: any
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<SuccessWithData & object>
-    > {
-      const localVarAxiosArgs = await ExportApiAxiosParamCreator(
-        configuration
-      ).exportTasksPost(inlineObject12, options);
-      return (
-        axios: AxiosInstance = globalAxios,
-        basePath: string = BASE_PATH
-      ) => {
-        const axiosRequestArgs = {
-          ...localVarAxiosArgs.options,
-          url: basePath + localVarAxiosArgs.url,
-        };
-        return axios.request(axiosRequestArgs);
-      };
-    },
-    /**
-     * 根据指定的参数创建新的签到数据导出任务
-     * @summary 创建导出任务
-     * @param {InlineObject12} [inlineObject12]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async exportTasksPost_3(
-      inlineObject12?: InlineObject12,
-      options?: any
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<SuccessWithData & object>
-    > {
-      const localVarAxiosArgs = await ExportApiAxiosParamCreator(
-        configuration
-      ).exportTasksPost_3(inlineObject12, options);
+      ).exportCheckinsXlsxGet_1(
+        groupIds,
+        dateStart,
+        dateEnd,
+        statuses,
+        options
+      );
       return (
         axios: AxiosInstance = globalAxios,
         basePath: string = BASE_PATH
@@ -530,85 +306,51 @@ export const ExportApiFactory = function (
 ) {
   return {
     /**
-     * 下载指定的导出文件
-     * @summary 下载导出文件
-     * @param {string} fileName 导出文件名
+     * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+     * @summary 导出签到记录为XLSX文件
+     * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+     * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+     * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+     * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    exportFilesFileNameGet(
-      fileName: string,
+    exportCheckinsXlsxGet(
+      groupIds: Array<number>,
+      dateStart: number,
+      dateEnd: number,
+      statuses?: Array<'success' | 'absent' | 'exception'>,
       options?: any
     ): AxiosPromise<object> {
       return ExportApiFp(configuration)
-        .exportFilesFileNameGet(fileName, options)
+        .exportCheckinsXlsxGet(groupIds, dateStart, dateEnd, statuses, options)
         .then((request) => request(axios, basePath));
     },
     /**
-     * 下载指定的导出文件
-     * @summary 下载导出文件
-     * @param {string} fileName 导出文件名
+     * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+     * @summary 导出签到记录为XLSX文件
+     * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+     * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+     * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+     * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    exportFilesFileNameGet_1(
-      fileName: string,
+    exportCheckinsXlsxGet_1(
+      groupIds: Array<number>,
+      dateStart: number,
+      dateEnd: number,
+      statuses?: Array<'success' | 'absent' | 'exception'>,
       options?: any
     ): AxiosPromise<object> {
       return ExportApiFp(configuration)
-        .exportFilesFileNameGet_1(fileName, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     * 获取当前用户创建的所有导出任务及状态
-     * @summary 获取导出任务列表
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksGet(options?: any): AxiosPromise<SuccessWithData & object> {
-      return ExportApiFp(configuration)
-        .exportTasksGet(options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     * 获取当前用户创建的所有导出任务及状态
-     * @summary 获取导出任务列表
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksGet_2(options?: any): AxiosPromise<SuccessWithData & object> {
-      return ExportApiFp(configuration)
-        .exportTasksGet_2(options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     * 根据指定的参数创建新的签到数据导出任务
-     * @summary 创建导出任务
-     * @param {InlineObject12} [inlineObject12]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksPost(
-      inlineObject12?: InlineObject12,
-      options?: any
-    ): AxiosPromise<SuccessWithData & object> {
-      return ExportApiFp(configuration)
-        .exportTasksPost(inlineObject12, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     * 根据指定的参数创建新的签到数据导出任务
-     * @summary 创建导出任务
-     * @param {InlineObject12} [inlineObject12]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    exportTasksPost_3(
-      inlineObject12?: InlineObject12,
-      options?: any
-    ): AxiosPromise<SuccessWithData & object> {
-      return ExportApiFp(configuration)
-        .exportTasksPost_3(inlineObject12, options)
+        .exportCheckinsXlsxGet_1(
+          groupIds,
+          dateStart,
+          dateEnd,
+          statuses,
+          options
+        )
         .then((request) => request(axios, basePath));
     },
   };
@@ -622,84 +364,48 @@ export const ExportApiFactory = function (
  */
 export class ExportApi extends BaseAPI {
   /**
-   * 下载指定的导出文件
-   * @summary 下载导出文件
-   * @param {string} fileName 导出文件名
+   * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+   * @summary 导出签到记录为XLSX文件
+   * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+   * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+   * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+   * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ExportApi
    */
-  public exportFilesFileNameGet(fileName: string, options?: any) {
+  public exportCheckinsXlsxGet(
+    groupIds: Array<number>,
+    dateStart: number,
+    dateEnd: number,
+    statuses?: Array<'success' | 'absent' | 'exception'>,
+    options?: any
+  ) {
     return ExportApiFp(this.configuration)
-      .exportFilesFileNameGet(fileName, options)
+      .exportCheckinsXlsxGet(groupIds, dateStart, dateEnd, statuses, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
-   * 下载指定的导出文件
-   * @summary 下载导出文件
-   * @param {string} fileName 导出文件名
+   * 根据指定的查询参数导出签到记录，并直接返回 XLSX 文件。
+   * @summary 导出签到记录为XLSX文件
+   * @param {Array<number>} groupIds 需要导出的用户组ID列表。例如：&#x60;groupIds&#x3D;1&amp;groupIds&#x3D;2&#x60; 或 &#x60;groupIds&#x3D;1,2,3&#x60;。
+   * @param {number} dateStart 开始日期（Unix时间戳，单位：秒）
+   * @param {number} dateEnd 结束日期（Unix时间戳，单位：秒）。必须大于或等于开始日期。
+   * @param {Array<'success' | 'absent' | 'exception'>} [statuses] 需要导出的签到状态列表。例如：&#x60;statuses&#x3D;success&amp;statuses&#x3D;absent&#x60; 或 &#x60;statuses&#x3D;success,absent&#x60;。如果未提供，则使用默认状态列表。
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ExportApi
    */
-  public exportFilesFileNameGet_1(fileName: string, options?: any) {
+  public exportCheckinsXlsxGet_1(
+    groupIds: Array<number>,
+    dateStart: number,
+    dateEnd: number,
+    statuses?: Array<'success' | 'absent' | 'exception'>,
+    options?: any
+  ) {
     return ExportApiFp(this.configuration)
-      .exportFilesFileNameGet_1(fileName, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   * 获取当前用户创建的所有导出任务及状态
-   * @summary 获取导出任务列表
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ExportApi
-   */
-  public exportTasksGet(options?: any) {
-    return ExportApiFp(this.configuration)
-      .exportTasksGet(options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   * 获取当前用户创建的所有导出任务及状态
-   * @summary 获取导出任务列表
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ExportApi
-   */
-  public exportTasksGet_2(options?: any) {
-    return ExportApiFp(this.configuration)
-      .exportTasksGet_2(options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   * 根据指定的参数创建新的签到数据导出任务
-   * @summary 创建导出任务
-   * @param {InlineObject12} [inlineObject12]
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ExportApi
-   */
-  public exportTasksPost(inlineObject12?: InlineObject12, options?: any) {
-    return ExportApiFp(this.configuration)
-      .exportTasksPost(inlineObject12, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   * 根据指定的参数创建新的签到数据导出任务
-   * @summary 创建导出任务
-   * @param {InlineObject12} [inlineObject12]
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ExportApi
-   */
-  public exportTasksPost_3(inlineObject12?: InlineObject12, options?: any) {
-    return ExportApiFp(this.configuration)
-      .exportTasksPost_3(inlineObject12, options)
+      .exportCheckinsXlsxGet_1(groupIds, dateStart, dateEnd, statuses, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
